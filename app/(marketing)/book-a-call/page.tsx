@@ -33,7 +33,10 @@ export default async function BookACallPage({
         <CalBooking packageId={packageId} />
         <p className="mt-8 text-sm text-muted-foreground">
           {contactPage.emailFallback}{" "}
-          <a className="text-gold" href={`mailto:${siteConfig.email}`}>
+          <a
+            className="text-gold underline underline-offset-4"
+            href={`mailto:${siteConfig.email}`}
+          >
             {siteConfig.email}
           </a>
         </p>

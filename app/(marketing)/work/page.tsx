@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/marketing/Section";
-import { Reveal } from "@/components/marketing/Reveal";
 import { CaseStudyCard } from "@/components/marketing/CaseStudyCard";
 import { CTASection } from "@/components/marketing/CTASection";
 import { caseStudies } from "@/lib/data/case-studies";
@@ -22,11 +21,11 @@ export default function WorkPage() {
         />
       </Section>
       <Section bordered className="pt-12 md:pt-16">
+        {/* No Reveal here: the grid is above the fold and its first image is
+            the page's LCP — JS-gated fades delay the recorded paint. */}
         <div className="grid gap-6 md:grid-cols-3">
-          {caseStudies.map((study, i) => (
-            <Reveal key={study.slug} delay={i * 0.08}>
-              <CaseStudyCard study={study} />
-            </Reveal>
+          {caseStudies.map((study) => (
+            <CaseStudyCard key={study.slug} study={study} priority />
           ))}
         </div>
       </Section>

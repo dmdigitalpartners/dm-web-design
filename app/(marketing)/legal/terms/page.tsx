@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default function TermsPage() {
           <h2>6. Лични данни</h2>
           <p className="mt-3">
             Обработването на лични данни през сайта е описано в{" "}
-            <a className="text-gold" href="/legal/privacy">
+            <a className="text-gold underline underline-offset-4" href="/legal/privacy">
               Политиката за поверителност
             </a>
             .
@@ -89,7 +89,7 @@ export default function TermsPage() {
           <p className="mt-3">
             За настоящите условия се прилага българското законодателство.
             Въпроси по тях можете да отправяте на{" "}
-            <a className="text-gold" href={`mailto:${siteConfig.email}`}>
+            <a className="text-gold underline underline-offset-4" href={`mailto:${siteConfig.email}`}>
               {siteConfig.email}
             </a>
             .

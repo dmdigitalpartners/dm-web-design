@@ -3,7 +3,13 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { CaseStudy } from "@/types/case-study";
 
-export function CaseStudyCard({ study }: { study: CaseStudy }) {
+export function CaseStudyCard({
+  study,
+  priority = false,
+}: {
+  study: CaseStudy;
+  priority?: boolean;
+}) {
   return (
     <Link
       href={`/work/${study.slug}`}
@@ -15,6 +21,8 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
           alt={`Началната страница на сайта на ${study.client}`}
           width={1440}
           height={900}
+          priority={priority}
+          fetchPriority={priority ? "high" : undefined}
           className="aspect-[8/5] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, 384px"
         />

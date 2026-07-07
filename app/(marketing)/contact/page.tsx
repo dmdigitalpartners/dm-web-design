@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { ContactForm } from "@/components/marketing/ContactForm";
+import { LocalBusinessJsonLd } from "@/components/marketing/LocalBusinessJsonLd";
 import { contactPage } from "@/lib/data/contact";
 import { siteConfig } from "@/lib/site-config";
 
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <LocalBusinessJsonLd />
       <Section className="pt-16 md:pt-20">
         <SectionHeading
           eyebrow={contactPage.header.eyebrow}

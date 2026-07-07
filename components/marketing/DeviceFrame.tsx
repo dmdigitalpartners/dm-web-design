@@ -29,6 +29,7 @@ export function DeviceFrame({
         width={1440}
         height={900}
         priority={priority}
+        fetchPriority={priority ? "high" : undefined}
         className="w-full"
         sizes="(max-width: 768px) 100vw, 640px"
       />

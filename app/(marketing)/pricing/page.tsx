@@ -41,7 +41,7 @@ export default function PricingPage() {
                 )}
               >
                 {pkg.recommended ? (
-                  <p className="absolute -top-3 left-8 bg-gold px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
+                  <p className="absolute -top-3 left-8 bg-primary px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
                     {pricingPage.recommendedBadge}
                   </p>
                 ) : null}

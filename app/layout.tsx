@@ -23,6 +23,16 @@ export const metadata: Metadata = {
   },
   description:
     "Уеб студио в Пловдив. Изработваме сайтове, които водят клиенти — стратегия, дизайн и безплатно демо преди какъвто и да е ангажимент.",
+  alternates: { canonical: "./" },
+  openGraph: {
+    type: "website",
+    locale: "bg_BG",
+    siteName: siteConfig.name,
+    images: [{ url: "/images/brand/og.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

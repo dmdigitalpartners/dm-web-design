@@ -67,25 +67,24 @@ export default async function CaseStudyPage({
 
       {/* Visual */}
       <Section bordered className="pt-12 md:pt-16">
-        <Reveal>
-          <div className="grid items-start gap-6 md:grid-cols-[2fr_1fr]">
-            <DeviceFrame
-              src={study.images.desktop}
-              alt={`Началната страница на ${study.client} на настолен екран`}
-              priority
+        {/* No Reveal: the desktop capture is this page's LCP element. */}
+        <div className="grid items-start gap-6 md:grid-cols-[2fr_1fr]">
+          <DeviceFrame
+            src={study.images.desktop}
+            alt={`Началната страница на ${study.client} на настолен екран`}
+            priority
+          />
+          <figure className="mx-auto w-full max-w-[240px] overflow-hidden border border-graphite bg-card">
+            <Image
+              src={study.images.mobile}
+              alt={`Сайтът на ${study.client} на мобилен екран`}
+              width={390}
+              height={844}
+              className="w-full"
+              sizes="240px"
             />
-            <figure className="mx-auto w-full max-w-[240px] overflow-hidden border border-graphite bg-card">
-              <Image
-                src={study.images.mobile}
-                alt={`Сайтът на ${study.client} на мобилен екран`}
-                width={390}
-                height={844}
-                className="w-full"
-                sizes="240px"
-              />
-            </figure>
-          </div>
-        </Reveal>
+          </figure>
+        </div>
       </Section>
 
       {/* Challenge */}

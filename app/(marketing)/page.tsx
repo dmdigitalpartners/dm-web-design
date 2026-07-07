@@ -7,6 +7,7 @@ import { CountUp } from "@/components/marketing/CountUp";
 import { DeviceFrame } from "@/components/marketing/DeviceFrame";
 import { CaseStudyCard } from "@/components/marketing/CaseStudyCard";
 import { CTASection } from "@/components/marketing/CTASection";
+import { LocalBusinessJsonLd } from "@/components/marketing/LocalBusinessJsonLd";
 import { home } from "@/lib/data/home";
 import { caseStudies } from "@/lib/data/case-studies";
 import { services } from "@/lib/data/services";
@@ -15,6 +16,7 @@ import { packages } from "@/lib/data/packages";
 export default function HomePage() {
   return (
     <>
+      <LocalBusinessJsonLd />
       {/* 1. Hero */}
       <Section className="pt-16 md:pt-24">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
@@ -46,13 +48,13 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <Reveal>
-            <DeviceFrame
-              src={caseStudies[0].images.desktop}
-              alt={`Сайтът на ${caseStudies[0].client}, изработен от D&M Web Design`}
-              priority
-            />
-          </Reveal>
+          {/* No entrance animation here: this is the LCP element and any
+              fade delays the recorded paint by the animation's duration. */}
+          <DeviceFrame
+            src={caseStudies[0].images.desktop}
+            alt={`Сайтът на ${caseStudies[0].client}, изработен от D&M Web Design`}
+            priority
+          />
         </div>
       </Section>
 

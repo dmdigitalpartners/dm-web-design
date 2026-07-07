@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             представлявано от Даниел Янчев и Мартин Станкин („ние“). За всички
             въпроси, свързани с личните ви данни, можете да се свържете с нас
             на:{" "}
-            <a className="text-gold" href={`mailto:${siteConfig.email}`}>
+            <a className="text-gold underline underline-offset-4" href={`mailto:${siteConfig.email}`}>
               {siteConfig.email}
             </a>
             .
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
           </ul>
           <p className="mt-3">
             За да упражните което и да е от тези права, пишете ни на{" "}
-            <a className="text-gold" href={`mailto:${siteConfig.email}`}>
+            <a className="text-gold underline underline-offset-4" href={`mailto:${siteConfig.email}`}>
               {siteConfig.email}
             </a>
             . Отговаряме в срок до един месец.
