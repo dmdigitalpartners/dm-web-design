@@ -24,7 +24,16 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
     await page.evaluate((t) => {
       document.documentElement.classList.toggle("dark", t === "dark");
     }, theme);
-    await page.waitForTimeout(600);
+    // Scroll through the page so whileInView reveals fire, then return to top
+    await page.evaluate(async () => {
+      const step = window.innerHeight / 2;
+      for (let y = 0; y < document.body.scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForTimeout(800);
     const path = `${outDir}${name}-${vpName}-${theme}.png`;
     await page.screenshot({ path, fullPage });
     console.log(path);
