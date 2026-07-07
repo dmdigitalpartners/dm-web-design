@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, monospace;
+  --font-heading: var(--font-inter-tight);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,75 +46,105 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* D&M brand tokens (BRAND_GUIDE.md palette) */
+  --color-carbon: #0b0b0c;
+  --color-bone: #f7f5f1;
+  --color-soft-white: #f2f1ee;
+  --color-ink: #17171a;
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-raw: #b8935a;
+  --color-sage: var(--sage);
+  --color-graphite: var(--graphite);
+  --color-warm-gray: var(--warm-gray);
 }
 
+/*
+  Light mode. WCAG AA note: raw Aged Gold #B8935A is only 2.62:1 on Bone —
+  it fails even the 3:1 UI-component minimum on light backgrounds. On light,
+  --gold resolves to the deepened #80622F (5.20:1); the raw gold is reserved
+  for large fills that carry Ink/Carbon text (6.27:1 / 6.89:1).
+*/
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #f7f5f1; /* Bone White */
+  --foreground: #17171a; /* Ink */
+  --card: #fdfcfa;
+  --card-foreground: #17171a;
+  --popover: #fdfcfa;
+  --popover-foreground: #17171a;
+  --primary: #b8935a; /* Aged Gold fill — pairs with carbon text (6.89:1) */
+  --primary-foreground: #0b0b0c;
+  --secondary: #ece9e2;
+  --secondary-foreground: #17171a;
+  --muted: #ece9e2;
+  --muted-foreground: #63605b; /* deepened Warm Gray, 5.75:1 on Bone */
+  --accent: #ece9e2;
+  --accent-foreground: #17171a;
+  --destructive: #a63a2e;
+  --border: #dedad1; /* Graphite (light) */
+  --input: #dedad1;
+  --ring: #80622f;
+  --chart-1: #b8935a;
+  --chart-2: #546849;
+  --chart-3: #63605b;
+  --chart-4: #17171a;
+  --chart-5: #dedad1;
+  --radius: 0rem; /* precision brutalism — sharp corners */
+  --sidebar: #f7f5f1;
+  --sidebar-foreground: #17171a;
+  --sidebar-primary: #b8935a;
+  --sidebar-primary-foreground: #0b0b0c;
+  --sidebar-accent: #ece9e2;
+  --sidebar-accent-foreground: #17171a;
+  --sidebar-border: #dedad1;
+  --sidebar-ring: #80622f;
+
+  --gold: #80622f; /* accessible gold for text/borders on light (5.20:1) */
+  --gold-bright: #6e5428; /* hover: darker on light for contrast lift */
+  --sage: #546849; /* deepened Muted Sage, 5.58:1 on Bone */
+  --graphite: #dedad1;
+  --warm-gray: #63605b;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #0b0b0c; /* Carbon Black */
+  --foreground: #f2f1ee; /* Soft White */
+  --card: #121214;
+  --card-foreground: #f2f1ee;
+  --popover: #121214;
+  --popover-foreground: #f2f1ee;
+  --primary: #b8935a; /* Aged Gold, 6.89:1 on Carbon */
+  --primary-foreground: #0b0b0c;
+  --secondary: #1a1a1d;
+  --secondary-foreground: #f2f1ee;
+  --muted: #1a1a1d;
+  --muted-foreground: #8c8983; /* Warm Gray, 5.64:1 on Carbon */
+  --accent: #1a1a1d;
+  --accent-foreground: #f2f1ee;
+  --destructive: #d06a5e;
+  --border: #2a2a2e; /* Graphite (dark) */
+  --input: #2a2a2e;
+  --ring: #b8935a;
+  --chart-1: #b8935a;
+  --chart-2: #7c9473;
+  --chart-3: #8c8983;
+  --chart-4: #f2f1ee;
+  --chart-5: #2a2a2e;
+  --sidebar: #0b0b0c;
+  --sidebar-foreground: #f2f1ee;
+  --sidebar-primary: #b8935a;
+  --sidebar-primary-foreground: #0b0b0c;
+  --sidebar-accent: #1a1a1d;
+  --sidebar-accent-foreground: #f2f1ee;
+  --sidebar-border: #2a2a2e;
+  --sidebar-ring: #b8935a;
+
+  --gold: #b8935a; /* Aged Gold as text/border, 6.89:1 on Carbon */
+  --gold-bright: #d4ac72; /* Bright Gold hover, 9.32:1 on Carbon */
+  --sage: #7c9473; /* Muted Sage, 5.94:1 on Carbon */
+  --graphite: #2a2a2e;
+  --warm-gray: #8c8983;
 }
 
 @layer base {
@@ -125,6 +155,16 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--background);
   }
 }

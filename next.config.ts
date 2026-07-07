@@ -12,8 +12,9 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      // Cal.com embed needs its script + frame; Next.js needs inline for hydration
-      "script-src 'self' 'unsafe-inline' https://app.cal.com https://cal.com",
+      // Cal.com embed needs its script + frame; Next.js needs inline for hydration.
+      // unsafe-eval is dev-only: React devtools reconstruct callstacks via eval.
+      `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://app.cal.com https://cal.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://app.cal.com",
       "font-src 'self'",
