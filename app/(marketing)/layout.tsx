@@ -1,6 +1,16 @@
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+
 export default function MarketingLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // Navbar and Footer are added in the layout-shell phase.
-  return <main id="content">{children}</main>;
+  return (
+    <>
+      <Navbar />
+      <main id="content" className="flex-1">
+        {children}
+      </main>
+      <Footer />
+    </>
+  );
 }
