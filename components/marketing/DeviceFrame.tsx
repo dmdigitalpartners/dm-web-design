@@ -14,7 +14,7 @@ export function DeviceFrame({
   className?: string;
 }) {
   return (
-    <figure className={cn("overflow-hidden border border-graphite bg-card", className)}>
+    <figure className={cn("overflow-hidden rounded-2xl border border-graphite bg-card", className)}>
       <div
         aria-hidden
         className="flex items-center gap-1.5 border-b border-graphite px-4 py-2.5"

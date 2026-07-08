@@ -8,6 +8,7 @@ import { Reveal } from "@/components/marketing/Reveal";
 import { DeviceFrame } from "@/components/marketing/DeviceFrame";
 import { ResultStatBlock } from "@/components/marketing/ResultStatBlock";
 import { Testimonial } from "@/components/marketing/Testimonial";
+import { CaseStudyJsonLd } from "@/components/marketing/CaseStudyJsonLd";
 import { CTASection } from "@/components/marketing/CTASection";
 import { caseStudies, getCaseStudy } from "@/lib/data/case-studies";
 
@@ -24,7 +25,9 @@ export async function generateMetadata({
   const study = getCaseStudy(slug);
   if (!study) return {};
   return {
-    title: study.seo.title,
+    // seo.title already carries the brand suffix; use absolute to avoid the
+    // "%s | D&M Web Design" template appending it a second time.
+    title: { absolute: study.seo.title },
     description: study.seo.description,
   };
 }
@@ -43,17 +46,33 @@ export default async function CaseStudyPage({
 
   return (
     <>
+      <CaseStudyJsonLd study={study} />
+
       {/* Header */}
       <Section className="pt-16 md:pt-20">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-gold">
+        <nav aria-label="Трасе" className="text-sm text-muted-foreground">
+          <Link href="/work" className="transition-colors hover:text-gold">
+            Проекти
+          </Link>
+          <span className="px-2" aria-hidden>
+            /
+          </span>
+          <span className="text-foreground">{study.client}</span>
+        </nav>
+        <p className="mt-6 text-sm font-medium uppercase tracking-[0.2em] text-gold">
           {study.industry} · {projectTypeLabel}
         </p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
           {study.client}
         </h1>
-        <p className="mt-4 max-w-2xl text-xl text-muted-foreground">
-          {study.resultHeadline}
-        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-4">
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/[0.06] px-4 py-1.5 font-heading text-lg font-bold text-sage">
+            {study.result.value}
+            <span className="text-sm font-normal text-muted-foreground">
+              {study.result.label}
+            </span>
+          </span>
+        </div>
         <a
           href={study.liveUrl}
           target="_blank"
@@ -74,7 +93,7 @@ export default async function CaseStudyPage({
             alt={`Началната страница на ${study.client} на настолен екран`}
             priority
           />
-          <figure className="mx-auto w-full max-w-[240px] overflow-hidden border border-graphite bg-card">
+          <figure className="mx-auto w-full max-w-[240px] overflow-hidden rounded-2xl border border-graphite bg-card">
             <Image
               src={study.images.mobile}
               alt={`Сайтът на ${study.client} на мобилен екран`}
@@ -102,15 +121,15 @@ export default async function CaseStudyPage({
           {study.approach.map((step, i) => (
             <li
               key={step.slice(0, 24)}
-              className="flex gap-5 border-b border-graphite py-6 first:border-t"
+              className="flex items-start gap-5 border-b border-graphite py-6 first:border-t"
             >
               <span
                 aria-hidden
-                className="font-heading text-sm font-bold text-gold"
+                className="flex size-9 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-gold/[0.06] font-heading text-sm font-bold text-gold"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <p className="text-muted-foreground">{step}</p>
+              <p className="pt-1 text-muted-foreground">{step}</p>
             </li>
           ))}
         </ol>
@@ -122,9 +141,11 @@ export default async function CaseStudyPage({
         <div className="mt-10 max-w-xl">
           <ResultStatBlock result={study.result} />
         </div>
-        <div className="mt-10 max-w-xl">
-          <Testimonial testimonial={study.testimonial} />
-        </div>
+        {study.testimonial ? (
+          <div className="mt-10 max-w-xl">
+            <Testimonial testimonial={study.testimonial} />
+          </div>
+        ) : null}
       </Section>
 
       {/* Other work */}
@@ -148,6 +169,7 @@ export default async function CaseStudyPage({
         title="Искате такъв резултат за вашия бизнес?"
         body="Разкажете ни за него в безплатен опознавателен разговор, ще ви покажем демо, преди да сте платили каквото и да е."
         cta="Запазете безплатен разговор"
+        location="case-study-final"
       />
     </>
   );
