@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Minimal browser-chrome frame — flat, single-weight, no skeuomorphism. */
+/** Minimal browser-chrome frame, flat, single-weight, no skeuomorphism. */
 export function DeviceFrame({
   src,
   alt,

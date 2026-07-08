@@ -57,11 +57,15 @@ export async function POST(request: NextRequest) {
 
   const { name, email, message } = parsed.data;
   const resend = new Resend(apiKey);
+  // Production deliverability requires a verified sending domain in Resend
+  // (set CONTACT_FROM to e.g. "D&M Website <hello@yourdomain.bg>" once DNS
+  // SPF/DKIM are configured). The resend.dev sandbox only works for testing.
+  const from = process.env.CONTACT_FROM ?? "D&M Website <onboarding@resend.dev>";
   const { error } = await resend.emails.send({
-    from: "D&M Website <onboarding@resend.dev>",
+    from,
     to: process.env.CONTACT_EMAIL ?? siteConfig.email,
     replyTo: email,
-    subject: `Ново запитване от сайта — ${name}`,
+    subject: `Ново запитване от сайта, ${name}`,
     text: `Име: ${name}\nИмейл: ${email}\n\n${message}`,
   });
 

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
+import { Founders } from "@/components/marketing/Founders";
 import { CTASection } from "@/components/marketing/CTASection";
 import { about } from "@/lib/data/about";
 
 export const metadata: Metadata = {
-  title: "За нас — Даниел Янчев и Мартин Станкин",
+  title: "За нас, Даниел Янчев и Мартин Станкин",
   description:
     "D&M Web Design е уеб студио от Пловдив, основано от Даниел Янчев и Мартин Станкин. Стратегия преди дизайн, доказателство преди обещания.",
 };
@@ -14,7 +15,11 @@ export default function AboutPage() {
   return (
     <>
       <Section className="pt-16 md:pt-20">
-        <SectionHeading eyebrow={about.story.eyebrow} title={about.story.title} />
+        <SectionHeading
+          as="h1"
+          eyebrow={about.story.eyebrow}
+          title={about.story.title}
+        />
         <div className="mt-6 max-w-2xl space-y-4 text-lg text-muted-foreground">
           {about.story.body.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>
@@ -24,20 +29,12 @@ export default function AboutPage() {
 
       {/* Founders */}
       <Section bordered>
-        <SectionHeading eyebrow="Екип" title="Основателите" />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {about.founders.map((founder) => (
-            <Reveal key={founder.name}>
-              <article className="h-full border border-graphite bg-card p-8">
-                <h3 className="font-heading text-xl font-bold">{founder.name}</h3>
-                <p className="mt-1 text-sm uppercase tracking-[0.15em] text-gold">
-                  {founder.role}
-                </p>
-                <p className="mt-4 text-muted-foreground">{founder.bio}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+        <SectionHeading
+          eyebrow="Екип"
+          title="Двама основатели, две ясни роли"
+          lead="Всеки проект минава през двама ни. Даниел води техническото изпълнение, Мартин, визуалната посока, а стратегията правим заедно, с вас."
+        />
+        <Founders />
       </Section>
 
       {/* Values */}
@@ -67,7 +64,7 @@ export default function AboutPage() {
 
       <CTASection
         title="Преценете ни по работата, не по думите"
-        body="Разгледайте проектите ни — или направо запазете разговор и вижте безплатно демо за вашия бранд."
+        body="Разгледайте проектите ни, или направо запазете разговор и вижте безплатно демо за вашия бранд."
         cta="Запазете безплатен разговор"
       />
     </>

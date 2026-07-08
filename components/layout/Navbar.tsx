@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookCta } from "@/components/marketing/BookCta";
 import {
   Sheet,
   SheetContent,
@@ -42,11 +43,16 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto flex max-w-6xl items-center justify-between px-6 transition-all duration-300",
-          scrolled ? "h-14" : "h-20"
+          "mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 transition-all duration-300",
+          scrolled ? "h-16" : "h-24"
         )}
       >
-        <Link href="/" className="flex items-center gap-3" aria-label="D&M Web Design — начало">
+        {/* Logo, left, the sole brand identifier (no wordmark) */}
+        <Link
+          href="/"
+          className="justify-self-start"
+          aria-label="D&M Web Design, начало"
+        >
           <Image
             src="/images/brand/logo-white-160.png"
             alt=""
@@ -54,7 +60,7 @@ export function Navbar() {
             height={160}
             className={cn(
               "w-auto transition-all duration-300 dark:block hidden",
-              scrolled ? "h-8" : "h-10"
+              scrolled ? "h-10" : "h-14"
             )}
             priority
           />
@@ -65,16 +71,17 @@ export function Navbar() {
             height={160}
             className={cn(
               "w-auto transition-all duration-300 dark:hidden block",
-              scrolled ? "h-8" : "h-10"
+              scrolled ? "h-10" : "h-14"
             )}
             priority
           />
-          <span className="font-heading text-lg font-bold tracking-tight">
-            D&M Web Design
-          </span>
         </Link>
 
-        <nav aria-label="Основна навигация" className="hidden items-center gap-8 md:flex">
+        {/* Navigation, centered */}
+        <nav
+          aria-label="Основна навигация"
+          className="hidden items-center gap-9 justify-self-center md:flex"
+        >
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -89,25 +96,29 @@ export function Navbar() {
               {label}
             </Link>
           ))}
-          <Button
-            render={<Link href={bookCta.href} />}
-            nativeButton={false}
-            size={scrolled ? "default" : "lg"}
-          >
-            {bookCta.label}
-          </Button>
         </nav>
 
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger
-            className="md:hidden"
-            render={
-              <Button variant="outline" size="icon" aria-label="Отвори менюто" />
-            }
-          >
-            <Menu className="size-5" />
-          </SheetTrigger>
-          <SheetContent side="right" className="w-72">
+        {/* Right column: desktop CTA + mobile menu trigger */}
+        <div className="justify-self-end">
+          <div className="hidden md:block">
+            <BookCta
+              location="nav"
+              label={bookCta.label}
+              size={scrolled ? "default" : "lg"}
+              attract
+            />
+          </div>
+
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              className="md:hidden"
+              render={
+                <Button variant="outline" size="icon" aria-label="Отвори менюто" />
+              }
+            >
+              <Menu className="size-5" />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72">
             <SheetHeader>
               <SheetTitle className="font-heading">Меню</SheetTitle>
             </SheetHeader>
@@ -124,17 +135,16 @@ export function Navbar() {
                   {label}
                 </Link>
               ))}
-              <Button
-                render={<Link href={bookCta.href} />}
-                nativeButton={false}
-                size="lg"
+              <BookCta
+                location="mobile-nav"
+                label={bookCta.labelLong}
+                size="xl"
                 className="mt-6"
-              >
-                {bookCta.label}
-              </Button>
+              />
             </nav>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

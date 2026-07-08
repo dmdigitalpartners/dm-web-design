@@ -90,7 +90,7 @@
   --chart-3: #63605b;
   --chart-4: #17171a;
   --chart-5: #dedad1;
-  --radius: 0rem; /* precision brutalism — sharp corners */
+  --radius: 0.75rem; /* refined premium — soft, confident corners */
   --sidebar: #f7f5f1;
   --sidebar-foreground: #17171a;
   --sidebar-primary: #b8935a;
@@ -155,7 +155,7 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans scroll-smooth;
+    @apply font-sans motion-safe:scroll-smooth;
   }
   h1,
   h2,
@@ -166,5 +166,43 @@
   ::selection {
     background: var(--gold);
     color: var(--background);
+  }
+}
+
+/*
+  Premium primary CTA. Resting state carries a soft gold glow; hover lifts and
+  intensifies. The `.cta-attract` modifier adds a slow, gentle breathing glow to
+  draw the eye without being distracting — disabled under reduced-motion.
+*/
+@layer components {
+  .btn-cta {
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--gold) 22%, transparent),
+      0 10px 30px -12px color-mix(in oklch, var(--gold) 55%, transparent);
+  }
+  .btn-cta:hover {
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--gold) 40%, transparent),
+      0 14px 40px -10px color-mix(in oklch, var(--gold) 75%, transparent);
+  }
+}
+
+@keyframes ctaGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--gold) 22%, transparent),
+      0 10px 30px -12px color-mix(in oklch, var(--gold) 45%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--gold) 38%, transparent),
+      0 12px 38px -8px color-mix(in oklch, var(--gold) 75%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cta-attract {
+    animation: ctaGlow 3.4s ease-in-out infinite;
   }
 }

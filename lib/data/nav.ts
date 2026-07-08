@@ -6,7 +6,12 @@ export const navLinks = [
   { href: "/about", label: "За нас" },
 ] as const;
 
-export const bookCta = { href: "/book-a-call", label: "Запази разговор" } as const;
+export const bookCta = {
+  href: "/book-a-call",
+  // Lead with the differentiator (the free demo) in the button itself.
+  label: "Безплатно демо",
+  labelLong: "Запазете безплатно демо",
+} as const;
 
 export const footerColumns = [
   {

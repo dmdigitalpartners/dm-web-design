@@ -25,8 +25,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
 
 function AccordionTrigger({
   className,
-  children,
-  ...props
+  children, ...props
 }: AccordionPrimitive.Trigger.Props) {
   return (
     <AccordionPrimitive.Header className="flex">
@@ -48,8 +47,7 @@ function AccordionTrigger({
 
 function AccordionContent({
   className,
-  children,
-  ...props
+  children, ...props
 }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel

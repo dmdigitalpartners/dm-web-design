@@ -5,14 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
 import { CTASection } from "@/components/marketing/CTASection";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { packages } from "@/lib/data/packages";
 import { pricingPage } from "@/lib/data/pricing-page";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Цени — прозрачни пакети за уеб сайт",
+  title: "Пакети за изработка на сайт",
   description:
-    "Изработка на сайт в Пловдив: Foundation, Growth и Authority — прозрачни ценови диапазони €500–1500+, ясен обхват, първи месец хостинг безплатен.",
+    "Три пакета за изработка на сайт в Пловдив: Foundation, Growth и Authority. Ясен обхват и включени услуги, индивидуална оферта след безплатно демо, първи месец хостинг безплатен.",
 };
 
 export default function PricingPage() {
@@ -20,6 +26,7 @@ export default function PricingPage() {
     <>
       <Section className="pt-16 md:pt-20">
         <SectionHeading
+          as="h1"
           eyebrow={pricingPage.header.eyebrow}
           title={pricingPage.header.title}
           lead={pricingPage.header.lead}
@@ -34,24 +41,30 @@ export default function PricingPage() {
               <article
                 aria-label={`Пакет ${pkg.name}`}
                 className={cn(
-                  "relative flex h-full flex-col bg-card p-8",
+                  "relative flex h-full flex-col rounded-2xl bg-card p-8",
                   pkg.recommended
                     ? "border-2 border-gold"
                     : "border border-graphite"
                 )}
               >
                 {pkg.recommended ? (
-                  <p className="absolute -top-3 left-8 bg-primary px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
+                  <p className="absolute -top-3 left-8 rounded-full bg-primary px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
                     {pricingPage.recommendedBadge}
                   </p>
                 ) : null}
                 <h2 className="font-heading text-2xl font-bold">{pkg.name}</h2>
                 <p className="mt-2 text-muted-foreground">{pkg.positioning}</p>
-                <p className="mt-6 font-heading text-xl font-bold text-gold">
-                  {pkg.priceRange}
+                <p className="mt-6 border-l-2 border-gold pl-4 text-sm font-medium text-foreground">
+                  {pricingPage.outcomes[pkg.id as keyof typeof pricingPage.outcomes]}
                 </p>
-                <p className="mt-4 text-sm text-muted-foreground">{pkg.audience}</p>
-                <ul className="mt-8 flex-1 space-y-3">
+                <p className="mt-5 text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                  Идеален за
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">{pkg.audience}</p>
+                <p className="mt-6 text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                  Какво включва
+                </p>
+                <ul className="mt-3 flex-1 space-y-3">
                   {pkg.features.map((feature) => (
                     <li key={feature} className="flex gap-3 text-sm">
                       <Check className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
@@ -62,7 +75,7 @@ export default function PricingPage() {
                 <Button
                   render={<Link href={`/book-a-call?package=${pkg.id}`} />}
                   nativeButton={false}
-                  variant={pkg.recommended ? "default" : "outline"}
+                  variant={pkg.recommended ? "cta" : "outline"}
                   size="lg"
                   className="mt-8 h-11"
                 >
@@ -73,9 +86,49 @@ export default function PricingPage() {
           ))}
         </div>
         <p className="mt-8 max-w-2xl text-sm text-muted-foreground">
-          Всеки пакет може да се разшири или свие според нуждите ви — точната
+          Всеки пакет може да се разшири или свие според нуждите ви. Индивидуална
           оферта получавате след безплатното демо, без ангажимент.
         </p>
+      </Section>
+
+      {/* Comparison */}
+      <Section bordered>
+        <SectionHeading title={pricingPage.comparison.title} />
+        <div className="mt-10 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-graphite text-left">
+                <th className="py-3 pr-4 font-medium text-muted-foreground"></th>
+                {packages.map((pkg) => (
+                  <th
+                    key={pkg.id}
+                    className={cn(
+                      "py-3 pr-4 font-heading text-base font-bold",
+                      pkg.recommended && "text-gold"
+                    )}
+                  >
+                    {pkg.name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {pricingPage.comparison.rows.map((row) => (
+                <tr key={row.label} className="border-b border-graphite/60">
+                  <th
+                    scope="row"
+                    className="py-3 pr-4 text-left font-medium text-muted-foreground"
+                  >
+                    {row.label}
+                  </th>
+                  <td className="py-3 pr-4">{row.foundation}</td>
+                  <td className="py-3 pr-4">{row.growth}</td>
+                  <td className="py-3 pr-4">{row.authority}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Section>
 
       {/* Why not Wix */}
@@ -117,10 +170,33 @@ export default function PricingPage() {
         </p>
       </Section>
 
+      {/* FAQ */}
+      <Section bordered>
+        <SectionHeading
+          eyebrow={pricingPage.faq.eyebrow}
+          title={pricingPage.faq.title}
+        />
+        <div className="mt-8 max-w-3xl">
+          <Accordion>
+            {pricingPage.faq.items.map((item) => (
+              <AccordionItem key={item.q} value={item.q}>
+                <AccordionTrigger className="py-4 text-base">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  <p>{item.a}</p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </Section>
+
       <CTASection
         title={pricingPage.faqCta.title}
         body={pricingPage.faqCta.body}
         cta={pricingPage.faqCta.cta}
+        location="pricing-final"
       />
     </>
   );

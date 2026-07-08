@@ -1,6 +1,6 @@
 import type { CaseStudyResult } from "@/types/case-study";
 
-/** Prominent verified-result block — sage is reserved for real metrics. */
+/** Prominent verified-result block, sage is reserved for real metrics. */
 export function ResultStatBlock({ result }: { result: CaseStudyResult }) {
   return (
     <div className="border-l-2 border-gold py-2 pl-6">

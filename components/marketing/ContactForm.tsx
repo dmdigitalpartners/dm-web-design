@@ -102,7 +102,7 @@ export function ContactForm() {
         ) : null}
       </div>
 
-      {/* Honeypot — hidden from real users, tabbed over by screen readers too */}
+      {/* Honeypot, hidden from real users, tabbed over by screen readers too */}
       <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="contact-company">Компания</label>
         <input

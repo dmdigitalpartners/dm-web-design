@@ -5,7 +5,7 @@ import { CTASection } from "@/components/marketing/CTASection";
 import { caseStudies } from "@/lib/data/case-studies";
 
 export const metadata: Metadata = {
-  title: "Проекти — реални резултати за реални бизнеси",
+  title: "Проекти, реални резултати за реални бизнеси",
   description:
     "Портфолио на D&M Web Design: Maxterm (3× повече покупки), Skat Print (повече запитвания), Tavernaki (15+ нови клиенти месечно). Уеб дизайн Пловдив.",
 };
@@ -15,6 +15,7 @@ export default function WorkPage() {
     <>
       <Section className="pt-16 md:pt-20">
         <SectionHeading
+          as="h1"
           eyebrow="Проекти"
           title="Работа, която се измерва в резултати"
           lead="Нямаме нужда да ви убеждаваме с прилагателни. Ето три реални бизнеса, три реални проекта и три измерими резултата."
@@ -22,7 +23,7 @@ export default function WorkPage() {
       </Section>
       <Section bordered className="pt-12 md:pt-16">
         {/* No Reveal here: the grid is above the fold and its first image is
-            the page's LCP — JS-gated fades delay the recorded paint. */}
+            the page's LCP, JS-gated fades delay the recorded paint. */}
         <div className="grid gap-6 md:grid-cols-3">
           {caseStudies.map((study) => (
             <CaseStudyCard key={study.slug} study={study} priority />
@@ -31,7 +32,7 @@ export default function WorkPage() {
       </Section>
       <CTASection
         title="Искате резултати като тези?"
-        body="Започваме с безплатен разговор и демо на вашата начална страница — виждате посоката, преди да решите."
+        body="Започваме с безплатен разговор и демо на вашата начална страница, виждате посоката, преди да решите."
         cta="Запазете безплатен разговор"
       />
     </>

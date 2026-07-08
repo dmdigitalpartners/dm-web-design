@@ -16,7 +16,7 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "Разкажете ни поне с едно изречение за какво става дума.")
     .max(5000, "Съобщението е твърде дълго."),
-  // Honeypot — real users never fill this hidden field
+  // Honeypot, real users never fill this hidden field
   company: z.string().max(0).optional().or(z.literal("")),
 });
 

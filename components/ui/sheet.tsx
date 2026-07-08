@@ -40,8 +40,7 @@ function SheetContent({
   className,
   children,
   side = "right",
-  showCloseButton = true,
-  ...props
+  showCloseButton = true, ...props
 }: SheetPrimitive.Popup.Props & {
   side?: "top" | "right" | "bottom" | "left"
   showCloseButton?: boolean
@@ -114,8 +113,7 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
 }
 
 function SheetDescription({
-  className,
-  ...props
+  className, ...props
 }: SheetPrimitive.Description.Props) {
   return (
     <SheetPrimitive.Description

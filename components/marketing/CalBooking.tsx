@@ -33,7 +33,7 @@ export function CalBooking({ packageId }: { packageId?: string }) {
           <a className="text-gold" href={`mailto:${siteConfig.email}`}>
             {siteConfig.email}
           </a>{" "}
-          — отговаряме до един работен ден.
+        , отговаряме до един работен ден.
         </p>
       </div>
     );
@@ -43,8 +43,7 @@ export function CalBooking({ packageId }: { packageId?: string }) {
     <Cal
       calLink={siteConfig.calLink}
       config={{
-        theme: "dark",
-        ...(packageId ? { notes: `Интерес към пакет: ${packageId}` } : {}),
+        theme: "dark", ...(packageId ? { notes: `Интерес към пакет: ${packageId}` } : {}),
       }}
       style={{ width: "100%", minHeight: "640px" }}
     />

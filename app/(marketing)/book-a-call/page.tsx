@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Запазете безплатен разговор",
   description:
-    "Резервирайте безплатен 15–30 минутен опознавателен разговор с D&M Web Design — без ангажимент, с безплатно демо на началната ви страница след него.",
+    "Резервирайте безплатен 15–30 минутен опознавателен разговор с D&M Web Design, без ангажимент, с безплатно демо на началната ви страница след него.",
 };
 
 export default async function BookACallPage({
@@ -19,8 +19,9 @@ export default async function BookACallPage({
 
   return (
     <>
-      <Section className="pt-16 md:pt-20">
+      <Section className="pb-0 pt-16 md:pt-20">
         <SectionHeading
+          as="h1"
           eyebrow={contactPage.booking.eyebrow}
           title={contactPage.booking.title}
           lead={contactPage.booking.lead}
@@ -29,7 +30,7 @@ export default async function BookACallPage({
           {contactPage.booking.note}
         </p>
       </Section>
-      <Section bordered className="pt-10 md:pt-12">
+      <Section className="pt-8 md:pt-10">
         <CalBooking packageId={packageId} />
         <p className="mt-8 text-sm text-muted-foreground">
           {contactPage.emailFallback}{" "}

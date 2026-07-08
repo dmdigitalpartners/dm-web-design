@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Контакт",
   description:
-    "Свържете се с D&M Web Design — уеб студио в Пловдив. Контактна форма, имейл или директна резервация на безплатен опознавателен разговор.",
+    "Свържете се с D&M Web Design, уеб студио в Пловдив. Контактна форма, имейл или директна резервация на безплатен опознавателен разговор.",
 };
 
 export default function ContactPage() {
@@ -19,6 +19,7 @@ export default function ContactPage() {
       <LocalBusinessJsonLd />
       <Section className="pt-16 md:pt-20">
         <SectionHeading
+          as="h1"
           eyebrow={contactPage.header.eyebrow}
           title={contactPage.header.title}
           lead={contactPage.header.lead}
@@ -33,7 +34,7 @@ export default function ContactPage() {
             </div>
           </div>
           <aside className="space-y-8 lg:pl-8">
-            <div className="border border-gold bg-card p-8">
+            <div className="rounded-2xl border border-gold bg-card p-8">
               <h2 className="font-heading text-xl font-bold">
                 {contactPage.booking.title}
               </h2>
@@ -46,7 +47,7 @@ export default function ContactPage() {
                 <ArrowRight className="size-4" />
               </Link>
             </div>
-            <div className="border border-graphite bg-card p-8">
+            <div className="rounded-2xl border border-graphite bg-card p-8">
               <h2 className="font-heading text-lg font-bold">
                 {contactPage.emailFallback}
               </h2>

@@ -1,18 +1,19 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Section } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
+import { BookCta } from "@/components/marketing/BookCta";
 
 export function CTASection({
   title,
   body,
   cta,
   note,
+  location = "cta-section",
 }: {
   title: string;
   body: string;
   cta: string;
   note?: string;
+  location?: string;
 }) {
   return (
     <Section bordered>
@@ -20,14 +21,9 @@ export function CTASection({
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
           <p className="mt-4 text-lg text-muted-foreground">{body}</p>
-          <Button
-            render={<Link href="/book-a-call" />}
-            nativeButton={false}
-            size="lg"
-            className="mt-8 h-12 px-8 text-base"
-          >
-            {cta}
-          </Button>
+          <div className="mt-8 flex justify-center">
+            <BookCta location={location} label={cta} attract />
+          </div>
           {note ? (
             <p className="mt-3 text-sm text-muted-foreground">{note}</p>
           ) : null}

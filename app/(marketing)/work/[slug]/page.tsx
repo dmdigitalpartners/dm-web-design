@@ -97,7 +97,7 @@ export default async function CaseStudyPage({
 
       {/* Approach */}
       <Section bordered>
-        <SectionHeading eyebrow="Какво направихме" title="Решенията — и защо" />
+        <SectionHeading eyebrow="Какво направихме" title="Решенията, и защо" />
         <ol className="mt-10 max-w-2xl space-y-0">
           {study.approach.map((step, i) => (
             <li
@@ -146,7 +146,7 @@ export default async function CaseStudyPage({
 
       <CTASection
         title="Искате такъв резултат за вашия бизнес?"
-        body="Разкажете ни за него в безплатен опознавателен разговор — ще ви покажем демо, преди да сте платили каквото и да е."
+        body="Разкажете ни за него в безплатен опознавателен разговор, ще ви покажем демо, преди да сте платили каквото и да е."
         cta="Запазете безплатен разговор"
       />
     </>

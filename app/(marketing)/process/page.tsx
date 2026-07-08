@@ -6,7 +6,7 @@ import { processSteps } from "@/lib/data/process-steps";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Как работим — демо преди договор",
+  title: "Как работим, демо преди договор",
   description:
     "Процесът на D&M Web Design: безплатен разговор, безплатно демо на началната ви страница, и чак тогава оферта. Виждате стойността, преди да платите.",
 };
@@ -16,6 +16,7 @@ export default function ProcessPage() {
     <>
       <Section className="pt-16 md:pt-20">
         <SectionHeading
+          as="h1"
           eyebrow="Процес"
           title="Виждате резултата, преди да платите"
           lead="Повечето агенции искат договор, преди да видите каквото и да е. Ние обърнахме реда: първите три стъпки са изцяло безплатни и без ангажимент."
@@ -26,19 +27,22 @@ export default function ProcessPage() {
         <ol className="relative max-w-3xl">
           {processSteps.map((step, i) => (
             <li key={step.title} className="relative flex gap-6 pb-12 last:pb-0 md:gap-8">
-              {/* timeline rail */}
+              {/* timeline rail: gold through the free steps, graphite after */}
               {i < processSteps.length - 1 ? (
                 <span
                   aria-hidden
-                  className="absolute left-5 top-12 h-full w-px bg-graphite md:left-6"
+                  className={cn(
+                    "absolute left-5 top-12 h-full w-px md:left-6",
+                    step.free && processSteps[i + 1].free ? "bg-gold/50" : "bg-graphite"
+                  )}
                 />
               ) : null}
               <span
                 aria-hidden
                 className={cn(
-                  "z-10 flex size-10 shrink-0 items-center justify-center border font-heading text-sm font-bold md:size-12",
+                  "z-10 flex size-10 shrink-0 items-center justify-center rounded-full border font-heading text-sm font-bold md:size-12",
                   step.free
-                    ? "border-gold bg-gold text-primary-foreground"
+                    ? "border-gold bg-gold text-primary-foreground shadow-lg shadow-gold/20"
                     : "border-graphite bg-card text-foreground"
                 )}
               >

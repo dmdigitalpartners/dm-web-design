@@ -23,7 +23,7 @@ export interface CaseStudy {
   };
   /**
    * Real client quote only. Leave undefined until a verified testimonial is
-   * collected — the testimonial block renders nothing when absent.
+   * collected, the testimonial block renders nothing when absent.
    */
   testimonial?: {
     quote: string;

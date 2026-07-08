@@ -13,7 +13,7 @@ export function CaseStudyCard({
   return (
     <Link
       href={`/work/${study.slug}`}
-      className="group flex flex-col border border-graphite bg-card transition-colors hover:border-gold"
+      className="group flex flex-col overflow-hidden rounded-xl border border-graphite bg-card transition-colors hover:border-gold"
     >
       <div className="overflow-hidden border-b border-graphite">
         <Image

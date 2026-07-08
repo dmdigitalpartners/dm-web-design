@@ -1,7 +1,7 @@
 import type { CaseStudy } from "@/types/case-study";
 
 /**
- * Renders only when a real, verified quote exists in the data — no
+ * Renders only when a real, verified quote exists in the data, no
  * placeholder fallback that could ship as fabricated content.
  */
 export function Testimonial({

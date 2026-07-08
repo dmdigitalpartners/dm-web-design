@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Sparkles, TrendingUp, Clock, ShieldCheck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
-import { CountUp } from "@/components/marketing/CountUp";
-import { DeviceFrame } from "@/components/marketing/DeviceFrame";
+import { HeroShowcase } from "@/components/marketing/HeroShowcase";
+import { WhyCompare } from "@/components/marketing/WhyCompare";
+import { Founders } from "@/components/marketing/Founders";
+import { Testimonials } from "@/components/marketing/Testimonials";
+import { BookCta } from "@/components/marketing/BookCta";
 import { CaseStudyCard } from "@/components/marketing/CaseStudyCard";
 import { CTASection } from "@/components/marketing/CTASection";
 import { LocalBusinessJsonLd } from "@/components/marketing/LocalBusinessJsonLd";
@@ -13,13 +15,37 @@ import { caseStudies } from "@/lib/data/case-studies";
 import { services } from "@/lib/data/services";
 import { packages } from "@/lib/data/packages";
 
+const reasons = [
+  {
+    icon: Sparkles,
+    title: "Безплатно демо, преди да платите",
+    body: "Виждате реалния дизайн на вашата начална страница, без аванс и без ангажимент.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Резултати, които се измерват",
+    body: "3× повече покупки, 15+ нови клиенти месечно за реални бизнеси в Пловдив.",
+  },
+  {
+    icon: Clock,
+    title: "Отговор до един работен ден",
+    body: "Пишете ни и се свързваме бързо. Без изчакване със седмици за отговор.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Прозрачност от начало до край",
+    body: "Ясен обхват, честна цена и първи месец хостинг напълно безплатен.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
       <LocalBusinessJsonLd />
+
       {/* 1. Hero */}
-      <Section className="pt-16 md:pt-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+      <Section className="pt-14 md:pt-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-gold">
               {home.hero.eyebrow}
@@ -30,15 +56,8 @@ export default function HomePage() {
             <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
               {home.hero.subheadline}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <Button
-                render={<Link href="/book-a-call" />}
-                nativeButton={false}
-                size="lg"
-                className="h-12 px-8 text-base"
-              >
-                {home.hero.primaryCta}
-              </Button>
+            <div className="mt-8 flex flex-wrap items-center gap-5">
+              <BookCta location="hero" attract />
               <Link
                 href="/work"
                 className="inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
@@ -47,57 +66,49 @@ export default function HomePage() {
                 <ArrowRight className="size-4" />
               </Link>
             </div>
+            <p className="mt-6 text-sm text-muted-foreground">
+              Без аванс · Без ангажимент · Отговор до 1 работен ден
+            </p>
           </div>
-          {/* No entrance animation here: this is the LCP element and any
-              fade delays the recorded paint by the animation's duration. */}
-          <DeviceFrame
-            src={caseStudies[0].images.desktop}
-            alt={`Сайтът на ${caseStudies[0].client}, изработен от D&M Web Design`}
-            priority
-          />
+          <HeroShowcase />
         </div>
       </Section>
 
-      {/* 2. Proof strip */}
-      <Section bordered className="py-12 md:py-14">
-        <h2 className="sr-only">{home.proofStrip.title}</h2>
-        <dl className="grid gap-8 sm:grid-cols-3">
-          {home.proofStrip.stats.map((stat) => (
-            <div key={stat.client} className="border-l-2 border-gold pl-5">
-              <dd className="font-heading text-4xl font-bold text-sage md:text-5xl">
-                <CountUp value={stat.value} suffix={stat.suffix} />
-              </dd>
-              <dt className="mt-1 text-muted-foreground">
-                {stat.label}
-                <span className="mt-0.5 block text-xs uppercase tracking-[0.15em]">
-                  {stat.client}
-                </span>
-              </dt>
+      {/* 2. Trust reasons */}
+      <Section bordered className="py-14 md:py-16">
+        <h2 className="sr-only">Защо да изберете D&M</h2>
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-graphite bg-graphite sm:grid-cols-2 lg:grid-cols-4">
+          {reasons.map((r) => (
+            <div key={r.title} className="bg-background p-6">
+              <r.icon className="size-6 text-gold" aria-hidden />
+              <h3 className="mt-4 font-heading font-bold">{r.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {r.body}
+              </p>
             </div>
           ))}
-        </dl>
+        </div>
       </Section>
 
-      {/* 3. Differentiator */}
+      {/* 3. Differentiator + interactive comparison */}
       <Section bordered>
         <Reveal>
           <SectionHeading
             eyebrow={home.differentiator.eyebrow}
             title={home.differentiator.title}
+            lead={home.differentiator.body[0]}
           />
-          <div className="mt-6 max-w-2xl space-y-4 text-lg text-muted-foreground">
-            {home.differentiator.body.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
+        </Reveal>
+        <WhyCompare />
+        <div className="mt-8">
           <Link
             href="/process"
-            className="mt-6 inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
+            className="inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
           >
             {home.differentiator.linkLabel}
             <ArrowRight className="size-4" />
           </Link>
-        </Reveal>
+        </div>
       </Section>
 
       {/* 4. Featured work */}
@@ -114,6 +125,15 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+        <div className="mt-8">
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
+          >
+            Вижте всички проекти
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
       </Section>
 
       {/* 5. Services overview */}
@@ -122,25 +142,32 @@ export default function HomePage() {
           eyebrow={home.servicesOverview.eyebrow}
           title={home.servicesOverview.title}
         />
-        <ul className="mt-12 grid gap-px border border-graphite bg-graphite sm:grid-cols-2 lg:grid-cols-5">
+        <ul className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-graphite bg-graphite sm:grid-cols-2 lg:grid-cols-5">
           {services.map((service) => (
-            <li key={service.id} className="bg-background p-6">
+            <li
+              key={service.id}
+              className="group bg-background p-6 transition-colors hover:bg-secondary"
+            >
               <service.icon className="size-6 text-gold" aria-hidden />
-              <h3 className="mt-4 font-heading font-bold">{service.title}</h3>
+              <h3 className="mt-4 font-heading font-bold transition-colors group-hover:text-gold">
+                {service.title}
+              </h3>
               <p className="mt-2 text-sm text-muted-foreground">{service.short}</p>
             </li>
           ))}
         </ul>
-        <Link
-          href="/services"
-          className="mt-8 inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
-        >
-          Всички услуги в детайл
-          <ArrowRight className="size-4" />
-        </Link>
+        <div className="mt-8">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
+          >
+            Всички услуги в детайл
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
       </Section>
 
-      {/* 6. Pricing teaser */}
+      {/* 6. Pricing teaser (no prices, value framing) */}
       <Section bordered>
         <SectionHeading
           eyebrow={home.pricingTeaser.eyebrow}
@@ -153,47 +180,70 @@ export default function HomePage() {
               key={pkg.id}
               className={
                 pkg.recommended
-                  ? "border-2 border-gold bg-card p-6"
-                  : "border border-graphite bg-card p-6"
+                  ? "relative rounded-2xl border-2 border-gold bg-card p-6"
+                  : "rounded-2xl border border-graphite bg-card p-6"
               }
             >
+              {pkg.recommended ? (
+                <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-0.5 text-xs font-semibold text-primary-foreground">
+                  Препоръчван
+                </span>
+              ) : null}
               <h3 className="font-heading text-lg font-bold">{pkg.name}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{pkg.positioning}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {pkg.audience}
+              </p>
             </div>
           ))}
         </div>
-        <Link
-          href="/pricing"
-          className="mt-8 inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
-        >
-          {home.pricingTeaser.linkLabel}
-          <ArrowRight className="size-4" />
-        </Link>
+        <div className="mt-8">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
+          >
+            {home.pricingTeaser.linkLabel}
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
       </Section>
 
-      {/* 7. About strip */}
-      <Section bordered className="py-14 md:py-16">
-        <Reveal>
-          <div className="max-w-2xl">
-            <h2 className="font-heading text-2xl font-bold">{home.aboutStrip.title}</h2>
-            <p className="mt-3 text-muted-foreground">{home.aboutStrip.body}</p>
-            <Link
-              href="/about"
-              className="mt-4 inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
-            >
-              {home.aboutStrip.linkLabel}
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-        </Reveal>
+      {/* 7. Founders */}
+      <Section bordered>
+        <SectionHeading
+          eyebrow="Екип"
+          title={home.aboutStrip.title}
+          lead={home.aboutStrip.body}
+        />
+        <Founders />
+        <div className="mt-8">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-1.5 text-gold transition-colors hover:text-gold-bright"
+          >
+            {home.aboutStrip.linkLabel}
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
       </Section>
 
-      {/* 8. Final CTA */}
+      {/* 8. Testimonials */}
+      <Section bordered>
+        <SectionHeading
+          eyebrow="Отзиви"
+          title="Какво казват клиентите"
+          lead="Реални бизнеси от Пловдив, които днес разчитат на сайтовете си."
+        />
+        <Testimonials />
+      </Section>
+
+      {/* 9. Final CTA */}
       <CTASection
         title={home.finalCta.title}
         body={home.finalCta.body}
         cta={home.finalCta.cta}
         note={home.finalCta.note}
+        location="home-final"
       />
     </>
   );

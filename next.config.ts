@@ -14,11 +14,11 @@ const securityHeaders = [
       "default-src 'self'",
       // Cal.com embed needs its script + frame; Next.js needs inline for hydration.
       // unsafe-eval is dev-only: React devtools reconstruct callstacks via eval.
-      `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://app.cal.com https://cal.com`,
+      `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://app.cal.com https://cal.com https://va.vercel-scripts.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://app.cal.com",
       "font-src 'self'",
-      "connect-src 'self' https://app.cal.com https://cal.com https://api.cal.com",
+      "connect-src 'self' https://app.cal.com https://cal.com https://api.cal.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
       "frame-src https://app.cal.com https://cal.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
