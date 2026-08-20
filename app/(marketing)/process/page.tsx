@@ -42,7 +42,7 @@ export default function ProcessPage() {
                 className={cn(
                   "z-10 flex size-10 shrink-0 items-center justify-center rounded-full border font-heading text-sm font-bold md:size-12",
                   step.free
-                    ? "border-gold bg-gold text-primary-foreground shadow-lg shadow-gold/20"
+                    ? "border-gold bg-gold text-primary-foreground shadow-gold"
                     : "border-graphite bg-card text-foreground"
                 )}
               >

@@ -19,7 +19,7 @@ export function Testimonials() {
     <div className="mt-12 grid gap-6 md:grid-cols-3">
       {testimonials.map((t, i) => (
         <Reveal key={t.company} delay={i * 0.08}>
-          <figure className="flex h-full flex-col rounded-2xl border border-graphite bg-card p-6">
+          <figure className="flex h-full flex-col rounded-xl border border-graphite bg-card p-6 text-card-foreground">
             <blockquote className="flex-1 text-[0.975rem] leading-relaxed text-foreground">
               <span aria-hidden className="font-heading text-3xl text-gold">
                 “

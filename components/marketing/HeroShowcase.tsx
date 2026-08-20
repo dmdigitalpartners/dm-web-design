@@ -76,7 +76,7 @@ export function HeroShowcase() {
               ? undefined
               : { rotateX, rotateY, transformStyle: "preserve-3d" }
           }
-          className="relative rounded-2xl border border-graphite bg-card shadow-2xl shadow-black/40"
+          className="relative rounded-xl border border-graphite bg-card text-card-foreground shadow-surface"
         >
           {/* Browser chrome */}
           <div className="flex items-center gap-2 border-b border-graphite px-4 py-3">
@@ -90,7 +90,7 @@ export function HeroShowcase() {
           </div>
 
           {/* Crossfading screenshots */}
-          <div className="relative aspect-[8/5] overflow-hidden rounded-b-2xl">
+          <div className="relative aspect-[8/5] overflow-hidden rounded-b-xl">
             {caseStudies.map((s, i) => (
               <Image
                 key={s.slug}
@@ -114,7 +114,7 @@ export function HeroShowcase() {
             initial={reduced ? false : { opacity: 0, y: 10, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="absolute -bottom-4 -right-3 max-w-[10rem] rounded-xl border border-gold/40 bg-background/95 p-3 shadow-xl backdrop-blur sm:-right-5"
+            className="absolute -bottom-4 -right-3 max-w-[10rem] rounded-xl border border-gold/40 bg-background/95 p-3 shadow-surface backdrop-blur sm:-right-5"
           >
             <div className="font-heading text-2xl font-bold text-gold">
               {study.result.value}

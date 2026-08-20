@@ -11,7 +11,7 @@ export function Testimonial({
 }) {
   if (!testimonial) return null;
   return (
-    <figure className="rounded-2xl border border-graphite bg-card p-8">
+    <figure className="rounded-xl border border-graphite bg-card p-8 text-card-foreground">
       <blockquote className="text-xl leading-relaxed">
         „{testimonial.quote}“
       </blockquote>

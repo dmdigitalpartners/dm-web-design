@@ -41,7 +41,7 @@ export default function PricingPage() {
               <article
                 aria-label={`Пакет ${pkg.name}`}
                 className={cn(
-                  "relative flex h-full flex-col rounded-2xl bg-card p-8",
+                  "relative flex h-full flex-col rounded-xl bg-card p-8 text-card-foreground",
                   pkg.recommended
                     ? "border-2 border-gold"
                     : "border border-graphite"

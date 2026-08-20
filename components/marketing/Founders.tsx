@@ -11,7 +11,7 @@ export function Founders() {
     <div className="mt-12 grid gap-6 sm:grid-cols-2">
       {founders.map((f, i) => (
         <Reveal key={f.name} delay={i * 0.08}>
-          <div className="flex h-full gap-5 rounded-2xl border border-graphite bg-card p-5 sm:p-6">
+          <div className="flex h-full gap-5 rounded-xl border border-graphite bg-card p-6 text-card-foreground">
             <Image
               src={f.portrait}
               alt={`${f.name}, ${f.role}`}

@@ -4,6 +4,7 @@ export const navLinks = [
   { href: "/pricing", label: "Цени" },
   { href: "/process", label: "Процес" },
   { href: "/about", label: "За нас" },
+  { href: "/contact", label: "Контакт" },
 ] as const;
 
 export const bookCta = {

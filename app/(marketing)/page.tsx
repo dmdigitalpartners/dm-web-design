@@ -2,10 +2,10 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, TrendingUp, Clock, ShieldCheck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
+import { CountUp } from "@/components/marketing/CountUp";
 import { HeroShowcase } from "@/components/marketing/HeroShowcase";
 import { WhyCompare } from "@/components/marketing/WhyCompare";
 import { Founders } from "@/components/marketing/Founders";
-import { Testimonials } from "@/components/marketing/Testimonials";
 import { BookCta } from "@/components/marketing/BookCta";
 import { CaseStudyCard } from "@/components/marketing/CaseStudyCard";
 import { CTASection } from "@/components/marketing/CTASection";
@@ -74,10 +74,35 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 2. Trust reasons */}
+      {/* 2. Proof strip: quick stat highlights pulled from real case studies */}
+      <Section bordered className="py-10 md:py-12">
+        <Reveal>
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+            <p className="max-w-[10rem] text-sm font-medium uppercase leading-snug tracking-[0.15em] text-muted-foreground">
+              {home.proofStrip.title}
+            </p>
+            <div className="grid grid-cols-1 gap-6 sm:flex sm:gap-10">
+              {home.proofStrip.stats.map((stat) => (
+                <div key={stat.client}>
+                  <CountUp
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    className="font-heading text-3xl font-bold text-gold"
+                  />
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {stat.label} <span className="text-foreground">· {stat.client}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </Section>
+
+      {/* 3. Trust reasons */}
       <Section bordered className="py-14 md:py-16">
-        <h2 className="sr-only">Защо да изберете D&M</h2>
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-graphite bg-graphite sm:grid-cols-2 lg:grid-cols-4">
+        <SectionHeading eyebrow="Доверие" title="Защо да изберете D&M" />
+        <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-graphite bg-graphite sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r) => (
             <div key={r.title} className="bg-background p-6">
               <r.icon className="size-6 text-gold" aria-hidden />
@@ -90,7 +115,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 3. Differentiator + interactive comparison */}
+      {/* 4. Differentiator + interactive comparison */}
       <Section bordered>
         <Reveal>
           <SectionHeading
@@ -111,7 +136,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 4. Featured work */}
+      {/* 5. Featured work */}
       <Section bordered>
         <SectionHeading
           eyebrow={home.featuredWork.eyebrow}
@@ -136,7 +161,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 5. Services overview */}
+      {/* 6. Services overview */}
       <Section bordered>
         <SectionHeading
           eyebrow={home.servicesOverview.eyebrow}
@@ -167,7 +192,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 6. Pricing teaser (no prices, value framing) */}
+      {/* 7. Pricing teaser (no prices, value framing) */}
       <Section bordered>
         <SectionHeading
           eyebrow={home.pricingTeaser.eyebrow}
@@ -180,8 +205,8 @@ export default function HomePage() {
               key={pkg.id}
               className={
                 pkg.recommended
-                  ? "relative rounded-2xl border-2 border-gold bg-card p-6"
-                  : "rounded-2xl border border-graphite bg-card p-6"
+                  ? "relative rounded-xl border-2 border-gold bg-card p-6 text-card-foreground"
+                  : "rounded-xl border border-graphite bg-card p-6 text-card-foreground"
               }
             >
               {pkg.recommended ? (
@@ -208,7 +233,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 7. Founders */}
+      {/* 8. Founders */}
       <Section bordered>
         <SectionHeading
           eyebrow="Екип"
@@ -225,16 +250,6 @@ export default function HomePage() {
             <ArrowRight className="size-4" />
           </Link>
         </div>
-      </Section>
-
-      {/* 8. Testimonials */}
-      <Section bordered>
-        <SectionHeading
-          eyebrow="Отзиви"
-          title="Какво казват клиентите"
-          lead="Реални бизнеси от Пловдив, които днес разчитат на сайтовете си."
-        />
-        <Testimonials />
       </Section>
 
       {/* 9. Final CTA */}
