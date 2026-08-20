@@ -80,7 +80,7 @@ export function Navbar() {
         {/* Navigation, centered */}
         <nav
           aria-label="Основна навигация"
-          className="hidden items-center gap-9 justify-self-center md:flex"
+          className="hidden items-center gap-5 justify-self-center md:flex lg:gap-9"
         >
           {navLinks.map(({ href, label }) => (
             <Link
@@ -129,7 +129,9 @@ export function Navbar() {
                   href={href}
                   className={cn(
                     "border-b border-graphite py-3 text-lg",
-                    pathname === href ? "text-gold" : "text-foreground"
+                    pathname === href || pathname.startsWith(`${href}/`)
+                      ? "text-gold"
+                      : "text-foreground"
                   )}
                 >
                   {label}

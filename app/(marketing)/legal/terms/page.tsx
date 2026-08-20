@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { Section } from "@/components/marketing/Section";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -11,13 +12,14 @@ const updated = "7 юли 2026 г.";
 
 export default function TermsPage() {
   return (
-    <section className="mx-auto max-w-3xl px-6 py-20">
-      <h1 className="text-4xl font-bold tracking-tight">Общи условия</h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Последна актуализация: {updated}
-      </p>
+    <Section className="pt-16 md:pt-20">
+      <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold tracking-tight">Общи условия</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Последна актуализация: {updated}
+        </p>
 
-      <div className="mt-10 space-y-8 text-muted-foreground [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-foreground [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-6">
+        <div className="mt-10 space-y-8 text-muted-foreground [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-foreground [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-6">
         <div>
           <h2>1. Общи положения</h2>
           <p className="mt-3">
@@ -96,6 +98,7 @@ export default function TermsPage() {
           </p>
         </div>
       </div>
-    </section>
+      </div>
+    </Section>
   );
 }

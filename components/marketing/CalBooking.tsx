@@ -26,7 +26,7 @@ export function CalBooking({ packageId }: { packageId?: string }) {
 
   if (!siteConfig.calLink) {
     return (
-      <div className="border border-graphite bg-card p-8 text-center">
+      <div className="rounded-xl border border-graphite bg-card p-8 text-center text-card-foreground">
         <p className="text-muted-foreground">
           Календарът за резервации се активира съвсем скоро. Междувременно ни
           пишете на{" "}

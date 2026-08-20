@@ -34,7 +34,7 @@ export default function ContactPage() {
             </div>
           </div>
           <aside className="space-y-8 lg:pl-8">
-            <div className="rounded-2xl border border-gold bg-card p-8">
+            <div className="rounded-xl border border-gold bg-card p-8 text-card-foreground">
               <h2 className="font-heading text-xl font-bold">
                 {contactPage.booking.title}
               </h2>
@@ -47,7 +47,7 @@ export default function ContactPage() {
                 <ArrowRight className="size-4" />
               </Link>
             </div>
-            <div className="rounded-2xl border border-graphite bg-card p-8">
+            <div className="rounded-xl border border-graphite bg-card p-8 text-card-foreground">
               <h2 className="font-heading text-lg font-bold">
                 {contactPage.emailFallback}
               </h2>

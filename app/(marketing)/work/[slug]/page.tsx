@@ -93,7 +93,7 @@ export default async function CaseStudyPage({
             alt={`Началната страница на ${study.client} на настолен екран`}
             priority
           />
-          <figure className="mx-auto w-full max-w-[240px] overflow-hidden rounded-2xl border border-graphite bg-card">
+          <figure className="mx-auto w-full max-w-[240px] overflow-hidden rounded-xl border border-graphite bg-card text-card-foreground">
             <Image
               src={study.images.mobile}
               alt={`Сайтът на ${study.client} на мобилен екран`}

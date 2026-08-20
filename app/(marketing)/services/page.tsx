@@ -25,7 +25,12 @@ export default function ServicesPage() {
       </Section>
 
       {services.map((service, i) => (
-        <Section key={service.id} id={service.id} bordered>
+        <Section
+          key={service.id}
+          id={service.id}
+          bordered
+          className={i % 2 === 1 ? "bg-secondary" : undefined}
+        >
           <Reveal>
             <div className="grid gap-8 md:grid-cols-[1fr_2fr]">
               <div>

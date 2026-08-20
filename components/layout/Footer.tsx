@@ -162,7 +162,9 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-graphite pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 D&M Web Design · {siteConfig.city}, {siteConfig.country}</p>
+          <p>
+            © {new Date().getFullYear()} D&M Web Design · {siteConfig.city}, {siteConfig.country}
+          </p>
           <p className="flex gap-4">
             <Link href="/legal/privacy" className="transition-colors hover:text-gold">
               Поверителност
