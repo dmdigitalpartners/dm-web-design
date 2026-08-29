@@ -1,4 +1,33 @@
 export const pricingPage = {
+  /*
+    A decision aid, above the three package cards. Presented in parallel, three
+    columns of features make the visitor run the comparison themselves; this
+    maps the situation they are already in onto one package, so they arrive at
+    a choice instead of auditing three feature lists.
+  */
+  chooser: {
+    eyebrow: "Откъде да започнете",
+    title: "Кое описва вашия случай?",
+    options: [
+      {
+        when: "Нямате сайт, или сегашният е шаблон, който не носи клиенти.",
+        packageId: "foundation",
+        packageName: "Foundation",
+      },
+      {
+        when: "Имате сайт, но той не води до запитвания, поръчки или резервации.",
+        packageId: "growth",
+        packageName: "Growth",
+      },
+      {
+        when: "Сайтът работи и искате да стане основният ви канал за растеж.",
+        packageId: "authority",
+        packageName: "Authority",
+      },
+    ],
+    note: "Не сте сигурни? Разговорът и демото са безплатни, а обхватът се уточнява след тях.",
+  },
+
   header: {
     eyebrow: "Пакети",
     title: "Три нива, скроени по вашата цел",

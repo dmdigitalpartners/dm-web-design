@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { ContactForm } from "@/components/marketing/ContactForm";
 import { LocalBusinessJsonLd } from "@/components/marketing/LocalBusinessJsonLd";
+import { cardSurface } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { contactPage } from "@/lib/data/contact";
 import { siteConfig } from "@/lib/site-config";
 
@@ -47,7 +49,7 @@ export default function ContactPage() {
                 <ArrowRight className="size-4" />
               </Link>
             </div>
-            <div className="rounded-xl border border-graphite bg-card p-8 text-card-foreground">
+            <div className={cn(cardSurface, "p-8")}>
               <h2 className="font-heading text-lg font-bold">
                 {contactPage.emailFallback}
               </h2>

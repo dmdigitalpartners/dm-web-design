@@ -1,3 +1,5 @@
+import { cardSurface } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import type { CaseStudy } from "@/types/case-study";
 
 /**
@@ -11,7 +13,7 @@ export function Testimonial({
 }) {
   if (!testimonial) return null;
   return (
-    <figure className="rounded-xl border border-graphite bg-card p-8 text-card-foreground">
+    <figure className={cn(cardSurface, "p-8")}>
       <blockquote className="text-xl leading-relaxed">
         „{testimonial.quote}“
       </blockquote>

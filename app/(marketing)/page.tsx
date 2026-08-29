@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, TrendingUp, Clock, ShieldCheck } from "lucide-react";
-import { Section, SectionHeading } from "@/components/marketing/Section";
+import { ArrowRight } from "lucide-react";
+import { Section, SectionHeading, Eyebrow } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
-import { CountUp } from "@/components/marketing/CountUp";
 import { HeroShowcase } from "@/components/marketing/HeroShowcase";
-import { WhyCompare } from "@/components/marketing/WhyCompare";
+import { ProofBand } from "@/components/marketing/ProofBand";
+import { StatementBand } from "@/components/marketing/StatementBand";
+import { ProcessCompare } from "@/components/marketing/ProcessCompare";
 import { Founders } from "@/components/marketing/Founders";
 import { BookCta } from "@/components/marketing/BookCta";
 import { CaseStudyCard } from "@/components/marketing/CaseStudyCard";
@@ -15,45 +16,30 @@ import { caseStudies } from "@/lib/data/case-studies";
 import { services } from "@/lib/data/services";
 import { packages } from "@/lib/data/packages";
 
-const reasons = [
-  {
-    icon: Sparkles,
-    title: "Безплатно демо, преди да платите",
-    body: "Виждате реалния дизайн на вашата начална страница, без аванс и без ангажимент.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Резултати, които се измерват",
-    body: "3× повече покупки, 15+ нови клиенти месечно за реални бизнеси в Пловдив.",
-  },
-  {
-    icon: Clock,
-    title: "Отговор до един работен ден",
-    body: "Пишете ни и се свързваме бързо. Без изчакване със седмици за отговор.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Прозрачност от начало до край",
-    body: "Ясен обхват, честна цена и първи месец хостинг напълно безплатен.",
-  },
-];
-
 export default function HomePage() {
   return (
     <>
       <LocalBusinessJsonLd />
 
-      {/* 1. Hero */}
-      <Section className="pt-14 md:pt-20">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
+      {/*
+        1. Hero. Runs on the wide measure while every other section keeps the
+        house max-w-6xl, so the page opens wider than it continues.
+      */}
+      <Section width="wide" className="pt-14 md:pt-20">
+        {/*
+          The headline spans the full measure rather than sitting in a column.
+          At display scale a 545px column broke it into four ragged lines, which
+          wastes the scale; across the full width it sets in two and reads as the
+          typographic moment the tier exists for.
+        */}
+        <Eyebrow>{home.hero.eyebrow}</Eyebrow>
+        <h1 className="mt-4 max-w-5xl text-display text-balance">
+          {home.hero.headline}
+        </h1>
+
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gold">
-              {home.hero.eyebrow}
-            </p>
-            <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-              {home.hero.headline}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
+            <p className="max-w-xl text-lg text-muted-foreground md:text-xl">
               {home.hero.subheadline}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-5">
@@ -74,57 +60,30 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 2. Proof strip: quick stat highlights pulled from real case studies */}
-      <Section bordered className="py-10 md:py-12">
-        <Reveal>
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
-            <p className="max-w-[10rem] text-sm font-medium uppercase leading-snug tracking-[0.15em] text-muted-foreground">
-              {home.proofStrip.title}
-            </p>
-            <div className="grid grid-cols-1 gap-6 sm:flex sm:gap-10">
-              {home.proofStrip.stats.map((stat) => (
-                <div key={stat.client}>
-                  <CountUp
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    className="font-heading text-3xl font-bold text-gold"
-                  />
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {stat.label} <span className="text-foreground">· {stat.client}</span>
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+      {/* 2. Proof band: the three real clients, stated as checkable facts */}
+      <Section bordered pad="compact">
+        <ProofBand />
       </Section>
 
-      {/* 3. Trust reasons */}
-      <Section bordered className="py-14 md:py-16">
-        <SectionHeading eyebrow="Доверие" title="Защо да изберете D&M" />
-        <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-graphite bg-graphite sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((r) => (
-            <div key={r.title} className="bg-background p-6">
-              <r.icon className="size-6 text-gold" aria-hidden />
-              <h3 className="mt-4 font-heading font-bold">{r.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {r.body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
+      {/*
+        The trust-reasons grid that used to sit here is gone. All four of its
+        cards were said elsewhere on this same page: the free demo by the
+        statement band, „3× повече покупки, 15+ нови клиенти“ by figures we no
+        longer headline, the one-working-day reply by the hero microcopy, and
+        transparency by the last row of the comparison below.
+      */}
 
-      {/* 4. Differentiator + interactive comparison */}
+      {/* 3. Differentiator + interactive comparison */}
       <Section bordered>
         <Reveal>
           <SectionHeading
             eyebrow={home.differentiator.eyebrow}
             title={home.differentiator.title}
             lead={home.differentiator.body[0]}
+            size="lg"
           />
         </Reveal>
-        <WhyCompare />
+        <ProcessCompare />
         <div className="mt-8">
           <Link
             href="/process"
@@ -142,13 +101,23 @@ export default function HomePage() {
           eyebrow={home.featuredWork.eyebrow}
           title={home.featuredWork.title}
           lead={home.featuredWork.lead}
+          size="lg"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {caseStudies.map((study, i) => (
-            <Reveal key={study.slug} delay={i * 0.08}>
-              <CaseStudyCard study={study} />
-            </Reveal>
-          ))}
+        {/*
+          One dominant project, two beside it. Equal thirds weighted all three
+          the same and rendered the studio's only real proof at thumbnail size.
+        */}
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+          <Reveal>
+            <CaseStudyCard study={caseStudies[0]} featured />
+          </Reveal>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+            {caseStudies.slice(1).map((study, i) => (
+              <Reveal key={study.slug} delay={0.08 + i * 0.08}>
+                <CaseStudyCard study={study} />
+              </Reveal>
+            ))}
+          </div>
         </div>
         <div className="mt-8">
           <Link
@@ -160,6 +129,9 @@ export default function HomePage() {
           </Link>
         </div>
       </Section>
+
+      {/* 5b. The promise, said once, at scale */}
+      <StatementBand />
 
       {/* 6. Services overview */}
       <Section bordered>
@@ -198,6 +170,7 @@ export default function HomePage() {
           eyebrow={home.pricingTeaser.eyebrow}
           title={home.pricingTeaser.title}
           lead={home.pricingTeaser.lead}
+          size="lg"
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {packages.map((pkg) => (
@@ -209,8 +182,14 @@ export default function HomePage() {
                   : "rounded-xl border border-graphite bg-card p-6 text-card-foreground"
               }
             >
+              {/*
+                bg-primary, not bg-gold: --gold is the text/border token and
+                deepens to #80622f on light, so carbon text on it fails AA.
+                --primary stays raw #b8935a in both modes, which is what the
+                globals.css note reserves for fills carrying carbon text.
+              */}
               {pkg.recommended ? (
-                <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-0.5 text-xs font-semibold text-primary-foreground">
+                <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground">
                   Препоръчван
                 </span>
               ) : null}
@@ -239,6 +218,7 @@ export default function HomePage() {
           eyebrow="Екип"
           title={home.aboutStrip.title}
           lead={home.aboutStrip.body}
+          size="lg"
         />
         <Founders />
         <div className="mt-8">
@@ -259,6 +239,8 @@ export default function HomePage() {
         cta={home.finalCta.cta}
         note={home.finalCta.note}
         location="home-final"
+        steps
+        stepsLabel={home.finalCta.stepsLabel}
       />
     </>
   );

@@ -42,6 +42,10 @@ yarn-error.log*
 next-env.d.ts
 
 .shots/
+.shots2/
+
+# Playwright MCP scratch captures
+.playwright-mcp/
 
 .vercel
 .env*

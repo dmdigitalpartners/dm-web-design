@@ -10,6 +10,8 @@ import { ResultStatBlock } from "@/components/marketing/ResultStatBlock";
 import { Testimonial } from "@/components/marketing/Testimonial";
 import { CaseStudyJsonLd } from "@/components/marketing/CaseStudyJsonLd";
 import { CTASection } from "@/components/marketing/CTASection";
+import { cardSurface } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { caseStudies, getCaseStudy } from "@/lib/data/case-studies";
 
 export function generateStaticParams() {
@@ -67,10 +69,17 @@ export default async function CaseStudyPage({
         </h1>
         <div className="mt-5 flex flex-wrap items-center gap-4">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/[0.06] px-4 py-1.5 font-heading text-lg font-bold text-sage">
-            {study.result.value}
-            <span className="text-sm font-normal text-muted-foreground">
-              {study.result.label}
-            </span>
+            {study.result.value ? (
+              <>
+                {study.result.value}
+                <span className="text-sm font-normal text-muted-foreground">
+                  {study.result.label}
+                </span>
+              </>
+            ) : (
+              /* Qualitative result: the words are the pill, no empty numeral. */
+              <span className="text-base">{study.result.label}</span>
+            )}
           </span>
         </div>
         <a
@@ -93,7 +102,7 @@ export default async function CaseStudyPage({
             alt={`Началната страница на ${study.client} на настолен екран`}
             priority
           />
-          <figure className="mx-auto w-full max-w-[240px] overflow-hidden rounded-xl border border-graphite bg-card text-card-foreground">
+          <figure className={cn(cardSurface, "mx-auto w-full max-w-60 overflow-hidden")}>
             <Image
               src={study.images.mobile}
               alt={`Сайтът на ${study.client} на мобилен екран`}

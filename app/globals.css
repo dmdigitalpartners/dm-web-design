@@ -33,7 +33,35 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
+  /*
+    Type scale. Previously absent: every heading on the site was an ad-hoc
+    `text-3xl md:text-4xl` at its call site, so the page had exactly one scale
+    step (the hero) and nothing below it ever became a typographic moment.
+
+    Three tiers, fluid so they need no breakpoint juggling:
+      display   — reserved. Hero h1 and the statement band, nothing else.
+      title-lg  — primary section headings.
+      title     — secondary headings and featured result lines.
+    Bulgarian words are long; every tier is checked at 390px.
+  */
+  --text-display: clamp(2.75rem, 6.5vw, 5.25rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 700;
+
+  --text-title-lg: clamp(2rem, 3.5vw, 3rem);
+  --text-title-lg--line-height: 1.1;
+  --text-title-lg--letter-spacing: -0.02em;
+
+  --text-title: clamp(1.5rem, 2.2vw, 2rem);
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.015em;
+
+  /* The eyebrow treatment, hand-typed as tracking-[0.2em] in ~8 places. */
+  --tracking-eyebrow: 0.2em;
+
   /* D&M brand tokens (BRAND_GUIDE.md palette) */
+  --color-surface-well: var(--surface-well);
   --color-carbon: #0b0b0c;
   --color-bone: #f7f5f1;
   --color-soft-white: #f2f1ee;
@@ -78,6 +106,9 @@
   --sage: #546849; /* deepened Muted Sage, 5.58:1 on Bone */
   --graphite: #dedad1;
   --warm-gray: #63605b;
+
+  /* Third surface tone — see the .dark note. Ink 17171a on e7e3da = 11.8:1. */
+  --surface-well: #e7e3da;
 }
 
 .dark {
@@ -105,6 +136,15 @@
   --sage: #7c9473; /* Muted Sage, 5.94:1 on Carbon */
   --graphite: #2a2a2e;
   --warm-gray: #8c8983;
+
+  /*
+    Third surface tone, below the page ground rather than above it. The site had
+    only two (#0b0b0c base, #1a1a1d raised) and the difference between them is
+    barely perceptible, so section-to-section contrast did no work. This "well"
+    goes deeper than the background so a full-bleed band reads as a recess.
+    Soft White f2f1ee on 070708 = 18.9:1; Aged Gold b8935a on 070708 = 7.3:1.
+  */
+  --surface-well: #070708;
 }
 
 @layer base {
@@ -154,9 +194,6 @@
   */
   .shadow-surface {
     box-shadow: 0 16px 40px -16px color-mix(in oklch, var(--color-carbon) 55%, transparent);
-  }
-  .shadow-gold {
-    box-shadow: 0 8px 24px -10px color-mix(in oklch, var(--gold) 30%, transparent);
   }
 }
 

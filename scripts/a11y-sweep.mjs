@@ -2,6 +2,9 @@
 import { chromium } from "playwright";
 import { AxeBuilder } from "@axe-core/playwright";
 
+// Port-aware so the harness can target a dev server that is not on :3000.
+const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+
 const routes = [
   "/",
   "/work",
@@ -25,7 +28,7 @@ let totalViolations = 0;
 
 for (const route of routes) {
   for (const theme of ["dark", "light"]) {
-    await page.goto(`http://localhost:3000${route}`, {
+    await page.goto(`${BASE}${route}`, {
       waitUntil: "load",
       timeout: 60000,
     });

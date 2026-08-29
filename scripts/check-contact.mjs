@@ -1,8 +1,11 @@
 import { chromium } from "playwright";
 
+// Port-aware so the harness can target a dev server that is not on :3000.
+const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-await page.goto("http://localhost:3000/contact", { waitUntil: "networkidle" });
+await page.goto(`${BASE}/contact`, { waitUntil: "networkidle" });
 
 // 1. Empty submit → client-side Zod errors
 await page.getByRole("button", { name: "Изпратете съобщението" }).click();

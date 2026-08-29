@@ -43,7 +43,7 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 transition-all duration-300",
+          "mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6 transition-all duration-300 motion-reduce:transition-none",
           scrolled ? "h-16" : "h-24"
         )}
       >
@@ -59,7 +59,7 @@ export function Navbar() {
             width={144}
             height={160}
             className={cn(
-              "w-auto transition-all duration-300 dark:block hidden",
+              "w-auto transition-all duration-300 motion-reduce:transition-none dark:block hidden",
               scrolled ? "h-10" : "h-14"
             )}
             priority
@@ -70,7 +70,7 @@ export function Navbar() {
             width={144}
             height={160}
             className={cn(
-              "w-auto transition-all duration-300 dark:hidden block",
+              "w-auto transition-all duration-300 motion-reduce:transition-none dark:hidden block",
               scrolled ? "h-10" : "h-14"
             )}
             priority

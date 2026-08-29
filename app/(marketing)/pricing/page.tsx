@@ -4,6 +4,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
+import { PackageChooser } from "@/components/marketing/PackageChooser";
 import { CTASection } from "@/components/marketing/CTASection";
 import {
   Accordion,
@@ -33,12 +34,18 @@ export default function PricingPage() {
         />
       </Section>
 
+      {/* Decision aid, before the cards */}
+      <Section bordered pad="compact">
+        <PackageChooser />
+      </Section>
+
       {/* Packages */}
       <Section bordered className="pt-12 md:pt-16">
         <div className="grid gap-6 lg:grid-cols-3">
           {packages.map((pkg, i) => (
             <Reveal key={pkg.id} delay={i * 0.08} className="h-full">
               <article
+                id={pkg.id}
                 aria-label={`Пакет ${pkg.name}`}
                 className={cn(
                   "relative flex h-full flex-col rounded-xl bg-card p-8 text-card-foreground",

@@ -1,7 +1,7 @@
 // Crawl all internal links from every route; report non-200s. Also checks 404 page.
 import { chromium } from "playwright";
 
-const base = "http://localhost:3000";
+const base = process.env.BASE_URL ?? "http://localhost:3000";
 const routes = [
   "/", "/work", "/work/maxterm", "/work/skat-print", "/work/tavernaki",
   "/services", "/pricing", "/process", "/about", "/contact", "/book-a-call",

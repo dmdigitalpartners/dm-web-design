@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { cardSurface } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 /** Minimal browser-chrome frame, flat, single-weight, no skeuomorphism. */
@@ -14,7 +15,7 @@ export function DeviceFrame({
   className?: string;
 }) {
   return (
-    <figure className={cn("overflow-hidden rounded-xl border border-graphite bg-card text-card-foreground", className)}>
+    <figure className={cn(cardSurface, "overflow-hidden", className)}>
       <div
         aria-hidden
         className="flex items-center gap-1.5 border-b border-graphite px-4 py-2.5"

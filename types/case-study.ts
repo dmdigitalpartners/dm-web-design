@@ -1,6 +1,11 @@
 export interface CaseStudyResult {
-  /** The headline metric, e.g. "3×" or "15+" */
-  value: string;
+  /**
+   * The headline metric, e.g. "3×" or "15+". Omit when the outcome is real but
+   * not quantified — Skat Print previously carried "↑" here, which rendered as
+   * a bare arrow at text-6xl where a number should be. A result without a
+   * figure is stated in words, not with a glyph standing in for one.
+   */
+  value?: string;
   /** What the metric measures, e.g. "повече покупки от сайта" */
   label: string;
 }

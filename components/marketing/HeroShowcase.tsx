@@ -10,6 +10,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { caseStudies } from "@/lib/data/case-studies";
+import { cardSurface } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const ROTATE_MS = 4500;
@@ -66,7 +67,7 @@ export function HeroShowcase() {
   return (
     <div className="select-none">
       <div
-        className="[perspective:1200px]"
+        className="relative perspective-distant"
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
       >
@@ -76,7 +77,7 @@ export function HeroShowcase() {
               ? undefined
               : { rotateX, rotateY, transformStyle: "preserve-3d" }
           }
-          className="relative rounded-xl border border-graphite bg-card text-card-foreground shadow-surface"
+          className={cn(cardSurface, "relative shadow-surface")}
         >
           {/* Browser chrome */}
           <div className="flex items-center gap-2 border-b border-graphite px-4 py-3">
@@ -90,7 +91,7 @@ export function HeroShowcase() {
           </div>
 
           {/* Crossfading screenshots */}
-          <div className="relative aspect-[8/5] overflow-hidden rounded-b-xl">
+          <div className="relative aspect-8/5 overflow-hidden rounded-b-xl">
             {caseStudies.map((s, i) => (
               <Image
                 key={s.slug}
@@ -108,21 +109,30 @@ export function HeroShowcase() {
             ))}
           </div>
 
-          {/* Floating result badge */}
-          <motion.div
-            key={study.slug}
-            initial={reduced ? false : { opacity: 0, y: 10, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="absolute -bottom-4 -right-3 max-w-[10rem] rounded-xl border border-gold/40 bg-background/95 p-3 shadow-surface backdrop-blur sm:-right-5"
-          >
-            <div className="font-heading text-2xl font-bold text-gold">
-              {study.result.value}
-            </div>
-            <div className="mt-0.5 text-xs leading-snug text-muted-foreground">
-              {study.result.label}
-            </div>
-          </motion.div>
+        </motion.div>
+
+        {/*
+          Identifies the project on screen. It used to headline study.result
+          („3×“, „15+“, and an „↑“ that is not a number at all) — figures that
+          now appear only on the case-study pages that can substantiate them.
+
+          It sits outside the tilting card on purpose: it stays crisp while the
+          screenshot tilts, and it can leave the frame on small screens, where
+          overlapping the corner crowded the screenshot at 390px.
+        */}
+        <motion.div
+          key={study.slug}
+          initial={reduced ? false : { opacity: 0, y: 10, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mt-4 rounded-xl border border-gold/40 bg-background/95 p-3 shadow-surface backdrop-blur sm:absolute sm:-bottom-4 sm:-right-5 sm:mt-0 sm:max-w-48"
+        >
+          <div className="font-heading text-lg font-bold text-gold">
+            {study.client}
+          </div>
+          <div className="mt-0.5 text-xs leading-snug text-muted-foreground">
+            {study.industry}
+          </div>
         </motion.div>
       </div>
 

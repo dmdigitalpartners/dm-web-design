@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
+import { ServiceVisual } from "@/components/marketing/ServiceVisual";
 import { CTASection } from "@/components/marketing/CTASection";
 import { services } from "@/lib/data/services";
 
@@ -32,23 +33,34 @@ export default function ServicesPage() {
           className={i % 2 === 1 ? "bg-secondary" : undefined}
         >
           <Reveal>
-            <div className="grid gap-8 md:grid-cols-[1fr_2fr]">
-              <div>
-                <service.icon className="size-8 text-gold" aria-hidden />
-                <h2 className="mt-4 font-heading text-2xl font-bold md:text-3xl">
+            {/*
+              Zigzag: the visual alternates sides row to row, so five services
+              do not read as five identical rows. It occupies the column that
+              previously held a 24px icon and nothing else.
+            */}
+            <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+              <div className={i % 2 === 1 ? "md:order-2" : undefined}>
+                <ServiceVisual id={service.id} />
+              </div>
+
+              <div className={i % 2 === 1 ? "md:order-1" : undefined}>
+                <div className="flex items-center gap-3">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-gold/30 text-gold">
+                    <service.icon className="size-5" aria-hidden />
+                  </span>
+                  <p className="text-sm font-medium uppercase tracking-eyebrow text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")} /{" "}
+                    {String(services.length).padStart(2, "0")}
+                  </p>
+                </div>
+
+                <h2 className="mt-5 font-heading text-title font-bold">
                   {service.title}
                 </h2>
-                <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+                <p className="mt-3 text-lg font-medium">{service.short}</p>
+                <p className="mt-4 text-muted-foreground">
+                  {service.description}
                 </p>
-              </div>
-              <div>
-                <p className="text-lg font-medium">{service.short}</p>
-                <div className="mt-4 space-y-4 text-muted-foreground">
-                  {service.description.map((p) => (
-                    <p key={p.slice(0, 24)}>{p}</p>
-                  ))}
-                </div>
                 <p className="mt-6 border-l-2 border-gold pl-4 text-sm text-muted-foreground">
                   {service.forWho}
                 </p>
