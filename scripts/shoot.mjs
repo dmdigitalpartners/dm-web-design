@@ -4,6 +4,7 @@
 // into <repo>/.shots/<name>-{desktop,mobile}-{dark,light}.png
 import { chromium } from "playwright";
 import { mkdirSync } from "fs";
+import { fileURLToPath } from "url";
 
 const [url, name, ...flags] = process.argv.slice(2);
 if (!url || !name) {
@@ -11,7 +12,7 @@ if (!url || !name) {
   process.exit(1);
 }
 const fullPage = flags.includes("--full");
-const outDir = new URL("../.shots/", import.meta.url).pathname.replace(/^\/(\w:)/, "$1");
+const outDir = fileURLToPath(new URL("../.shots/", import.meta.url));
 mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch();

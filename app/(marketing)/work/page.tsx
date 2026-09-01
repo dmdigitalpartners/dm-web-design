@@ -24,11 +24,16 @@ export default function WorkPage() {
       <Section bordered className="pt-12 md:pt-16">
         {/* No Reveal here: the grid is above the fold and its first image is
             the page's LCP, JS-gated fades delay the recorded paint. */}
-        <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+        <div className="grid items-start gap-6 lg:grid-cols-[1.6fr_1fr]">
           <CaseStudyCard study={caseStudies[0]} priority featured />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+          <div className="grid content-start gap-6 sm:grid-cols-2 lg:grid-cols-1">
             {caseStudies.slice(1).map((study) => (
-              <CaseStudyCard key={study.slug} study={study} priority />
+              <CaseStudyCard
+                key={study.slug}
+                study={study}
+                priority
+                className="h-full"
+              />
             ))}
           </div>
         </div>

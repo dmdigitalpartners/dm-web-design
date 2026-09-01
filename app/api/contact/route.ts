@@ -3,26 +3,55 @@ import { Resend } from "resend";
 import { contactSchema } from "@/lib/validation/contact-schema";
 import { siteConfig } from "@/lib/site-config";
 
-// Simple in-memory rate limit: 5 requests / 10 min per IP. Resets on
-// redeploy, which is fine for a marketing-site contact form.
+// Best-effort, per-instance rate limit for the marketing form. It resets on
+// redeploy and does not coordinate across serverless instances.
 const WINDOW_MS = 10 * 60 * 1000;
 const LIMIT = 5;
-const hits = new Map<string, number[]>();
+const MAX_TRACKED_IPS = 1_000;
+const hits = new Map<string, { count: number; resetAt: number }>();
 
-function rateLimited(ip: string) {
+function pruneExpiredHits(now: number) {
+  for (const [ip, entry] of hits) {
+    if (entry.resetAt <= now) hits.delete(ip);
+  }
+}
+
+function rateLimit(ip: string) {
   const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > LIMIT;
+  const existing = hits.get(ip);
+
+  if (!existing || existing.resetAt <= now) {
+    if (!existing && hits.size >= MAX_TRACKED_IPS) pruneExpiredHits(now);
+
+    // Keep memory bounded. If every retained entry is active, fail open for a
+    // new address rather than denying unrelated visitors.
+    if (!existing && hits.size >= MAX_TRACKED_IPS) {
+      return { limited: false, retryAfter: 0 };
+    }
+
+    hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+    return { limited: false, retryAfter: 0 };
+  }
+
+  const retryAfter = Math.max(1, Math.ceil((existing.resetAt - now) / 1_000));
+  if (existing.count >= LIMIT) return { limited: true, retryAfter };
+
+  existing.count += 1;
+  return { limited: false, retryAfter: 0 };
+}
+
+function getClientIp(request: NextRequest) {
+  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return forwarded || request.headers.get("x-real-ip")?.trim() || null;
 }
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
-  if (rateLimited(ip)) {
+  const ip = getClientIp(request);
+  const limit = ip ? rateLimit(ip) : { limited: false, retryAfter: 0 };
+  if (limit.limited) {
     return NextResponse.json(
       { ok: false, error: "Твърде много опити. Опитайте отново по-късно." },
-      { status: 429 }
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } }
     );
   }
 

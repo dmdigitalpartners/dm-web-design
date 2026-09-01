@@ -156,6 +156,7 @@
   }
   html {
     @apply font-sans motion-safe:scroll-smooth;
+    scroll-padding-top: 7rem;
   }
   h1,
   h2,
@@ -184,6 +185,10 @@
     box-shadow:
       0 0 0 1px color-mix(in oklch, var(--gold) 40%, transparent),
       0 14px 40px -10px color-mix(in oklch, var(--gold) 75%, transparent);
+  }
+  .btn-cta:focus-visible {
+    outline: 3px solid var(--ring) !important;
+    outline-offset: 3px;
   }
 
   /*
@@ -214,5 +219,8 @@
 @media (prefers-reduced-motion: no-preference) {
   .cta-attract {
     animation: ctaGlow 3.4s ease-in-out infinite;
+  }
+  .cta-attract:focus-visible {
+    animation: none;
   }
 }

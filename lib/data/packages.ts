@@ -18,7 +18,7 @@ export const packages: PricingPackage[] = [
       "Първият месец хостинг, безплатен",
     ],
     recommended: false,
-    cta: "Изберете Foundation",
+    cta: "Запазете разговор",
   },
   {
     id: "growth",
@@ -37,7 +37,7 @@ export const packages: PricingPackage[] = [
       "Първият месец хостинг, безплатен",
     ],
     recommended: true,
-    cta: "Изберете Growth",
+    cta: "Запазете разговор",
   },
   {
     id: "authority",
@@ -56,6 +56,6 @@ export const packages: PricingPackage[] = [
       "Първият месец хостинг, безплатен",
     ],
     recommended: false,
-    cta: "Изберете Authority",
+    cta: "Запазете разговор",
   },
 ];

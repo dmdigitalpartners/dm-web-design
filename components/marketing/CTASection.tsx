@@ -21,7 +21,8 @@ export function CTASection({
   stepsLabel,
 }: {
   title: string;
-  body: string;
+  /** ReactNode so a page can link a phrase inside it; plain strings still work. */
+  body: React.ReactNode;
   cta: string;
   note?: string;
   location?: string;

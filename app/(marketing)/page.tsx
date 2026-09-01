@@ -107,14 +107,14 @@ export default function HomePage() {
           One dominant project, two beside it. Equal thirds weighted all three
           the same and rendered the studio's only real proof at thumbnail size.
         */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+        <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.6fr_1fr]">
           <Reveal>
             <CaseStudyCard study={caseStudies[0]} featured />
           </Reveal>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+          <div className="grid content-start gap-6 sm:grid-cols-2 lg:grid-cols-1">
             {caseStudies.slice(1).map((study, i) => (
-              <Reveal key={study.slug} delay={0.08 + i * 0.08}>
-                <CaseStudyCard study={study} />
+              <Reveal key={study.slug} delay={0.08 + i * 0.08} className="h-full">
+                <CaseStudyCard study={study} className="h-full" />
               </Reveal>
             ))}
           </div>

@@ -12,6 +12,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { cardSurface } from "@/components/ui/card";
 import { packages } from "@/lib/data/packages";
 import { pricingPage } from "@/lib/data/pricing-page";
 import { cn } from "@/lib/utils";
@@ -79,12 +80,19 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
+                {/*
+                  Was „Изберете {pkg.name}" — which implies committing to a
+                  package whose price you have not seen, when it books a free
+                  call. The visible label is short so it fits a 320px card; the
+                  package stays in the accessible name and in the query string.
+                */}
                 <Button
                   render={<Link href={`/book-a-call?package=${pkg.id}`} />}
                   nativeButton={false}
                   variant={pkg.recommended ? "cta" : "outline"}
                   size="lg"
-                  className="mt-8 h-11"
+                  aria-label={`${pkg.cta} за пакет ${pkg.name}`}
+                  className="mt-8 h-auto min-h-11 whitespace-normal py-2.5 text-center"
                 >
                   {pkg.cta}
                 </Button>
@@ -101,11 +109,62 @@ export default function PricingPage() {
       {/* Comparison */}
       <Section bordered>
         <SectionHeading title={pricingPage.comparison.title} />
-        <div className="mt-10 overflow-x-auto">
+        {/*
+          Below md the table is stacked into one block per package. At 390px the
+          640px table left the entire Authority column off-screen with no fade,
+          scrollbar or hint — it read as broken rather than scrollable, on the
+          page whose job is choosing a package, for a mostly-mobile market.
+        */}
+        <div className="mt-10 space-y-4 md:hidden">
+          {packages.map((pkg) => (
+            <div
+              key={pkg.id}
+              className={cn(
+                cardSurface,
+                "p-5",
+                pkg.recommended && "border-gold",
+              )}
+            >
+              <h3
+                className={cn(
+                  "font-heading text-base font-bold",
+                  pkg.recommended && "text-gold",
+                )}
+              >
+                {pkg.name}
+              </h3>
+              <dl className="mt-3">
+                {pricingPage.comparison.rows.map((row) => (
+                  <div
+                    key={row.label}
+                    className="border-t border-graphite/60 py-2.5 first:border-t-0 first:pt-0"
+                  >
+                    <dt className="text-xs uppercase tracking-wider text-muted-foreground">
+                      {row.label}
+                    </dt>
+                    <dd className="mt-0.5 text-sm">{row[pkg.id]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+
+        <div
+          role="region"
+          aria-label={pricingPage.comparison.title}
+          tabIndex={0}
+          className="mt-10 hidden overflow-x-auto rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:block"
+        >
           <table className="w-full min-w-[640px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-graphite text-left">
-                <th className="py-3 pr-4 font-medium text-muted-foreground"></th>
+                <th
+                  scope="col"
+                  className="py-3 pr-4 font-medium text-muted-foreground"
+                >
+                  {pricingPage.comparison.columnLabel}
+                </th>
                 {packages.map((pkg) => (
                   <th
                     key={pkg.id}
