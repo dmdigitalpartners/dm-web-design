@@ -85,11 +85,26 @@ export const home = {
         { label: "Изграждане и старт" },
       ],
     },
+    /*
+      These two labels appear on BOTH tracks — that is their whole job. They are
+      the cross-reference that lets you compare where each marker falls, and on
+      mobile, where the tracks stack and the first scrolls out of view, they are
+      the only comparison a reader has. So each must be true of both processes:
+      „Виждате демото" was wrong on the usual track, where there is no demo.
+    */
     markLabels: {
       payment: "Плащане",
-      reveal: "Виждате",
+      reveal: "Виждате работата",
     },
-    freeLabel: "Безплатно, без ангажимент",
+    /*
+      Kept in step with `dm.steps` above: steps 1–3 carry `free: true` and the
+      payment marker sits on step 4. This previously read „· 3 стъпки" beneath a
+      row ending in a numeral 5, which two agents independently read as a
+      contradiction and had to stop and count. Say which steps, and when money
+      changes hands — that is the fact the reader most wants.
+    */
+    freeNote:
+      "Стъпки 1–3 са безплатни. Плащате на стъпка 4, след като сте видели демото.",
   },
   featuredWork: {
     eyebrow: "Проекти",
@@ -102,9 +117,9 @@ export const home = {
   },
   pricingTeaser: {
     eyebrow: "Цени",
-    title: "Прозрачни пакети, без скрити такси",
-    lead: "Три нива според целите ви, всяко с ясен обхват и честна цена.",
-    linkLabel: "Вижте пълните цени",
+    title: "Ясни пакети, без скрити условия",
+    lead: "Три нива според целите ви, всяко с ясен обхват. Точната оферта получавате след безплатното демо.",
+    linkLabel: "Вижте пакетите",
   },
   aboutStrip: {
     title: "Двама основатели от Пловдив, които мислят като вашия бизнес",
@@ -120,6 +135,7 @@ export const home = {
   */
   statement: {
     text: "Вижте дизайна на вашия сайт, преди да платите каквото и да е.",
+    cta: "Запазете безплатно демо",
   },
 
   finalCta: {

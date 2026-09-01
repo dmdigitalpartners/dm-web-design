@@ -117,20 +117,22 @@ export function HeroShowcase() {
           now appear only on the case-study pages that can substantiate them.
 
           It sits outside the tilting card on purpose: it stays crisp while the
-          screenshot tilts, and it can leave the frame on small screens, where
-          overlapping the corner crowded the screenshot at 390px.
+          screenshot tilts, and it can leave the frame on small screens.
+
+          It now carries only the industry, and sits over the empty right side of
+          the browser chrome. Previously it named the client at the bottom-right,
+          where it covered the mockup's own stat strip — and the client name was
+          already on the chrome line above it and the tab below it, three times
+          in one composition.
         */}
         <motion.div
           key={study.slug}
           initial={reduced ? false : { opacity: 0, y: 10, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className="mt-4 rounded-xl border border-gold/40 bg-background/95 p-3 shadow-surface backdrop-blur sm:absolute sm:-bottom-4 sm:-right-5 sm:mt-0 sm:max-w-48"
+          className="mt-4 rounded-lg border border-gold/40 bg-background/95 px-3 py-1.5 shadow-surface backdrop-blur sm:absolute sm:-right-4 sm:-top-3 sm:mt-0 sm:max-w-52"
         >
-          <div className="font-heading text-lg font-bold text-gold">
-            {study.client}
-          </div>
-          <div className="mt-0.5 text-xs leading-snug text-muted-foreground">
+          <div className="text-xs leading-snug text-muted-foreground">
             {study.industry}
           </div>
         </motion.div>

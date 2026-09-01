@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -16,12 +16,18 @@ type Status = "idle" | "sending" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
+  const statusRef = useRef<HTMLParagraphElement>(null);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<ContactInput>({ resolver: zodResolver(contactSchema) });
+
+  useEffect(() => {
+    if (status !== "success" && status !== "error") return;
+    statusRef.current?.focus();
+  }, [status]);
 
   const onSubmit = async (data: ContactInput) => {
     setStatus("sending");
@@ -118,14 +124,23 @@ export function ContactForm() {
         {status === "sending" ? f.sending : f.submit}
       </Button>
 
-      <p aria-live="polite" role="status" className="min-h-6 text-sm">
+      <p
+        ref={statusRef}
+        aria-live="polite"
+        role="status"
+        tabIndex={-1}
+        className="scroll-mt-28 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
         {status === "success" ? (
           <span className="text-sage">{f.success}</span>
         ) : null}
         {status === "error" ? (
           <span className="text-destructive">
             {serverError}{" "}
-            <a className="underline" href={`mailto:${siteConfig.email}`}>
+            <a
+              className="rounded-sm underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              href={`mailto:${siteConfig.email}`}
+            >
               {siteConfig.email}
             </a>
           </span>

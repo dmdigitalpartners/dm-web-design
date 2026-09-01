@@ -15,10 +15,12 @@ export function CaseStudyCard({
   study,
   priority = false,
   featured = false,
+  className,
 }: {
   study: CaseStudy;
   priority?: boolean;
   featured?: boolean;
+  className?: string;
 }) {
   return (
     <Link
@@ -26,6 +28,7 @@ export function CaseStudyCard({
       className={cn(
         cardSurface,
         "group flex flex-col overflow-hidden transition-colors hover:border-gold",
+        className,
       )}
     >
       <div className="overflow-hidden border-b border-graphite">

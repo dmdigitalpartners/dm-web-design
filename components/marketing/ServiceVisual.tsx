@@ -49,23 +49,46 @@ function Bar({ w, className }: { w: string; className?: string }) {
   );
 }
 
-function TypeSpecimen() {
+/*
+  Was a type specimen — „Аа / INTER TIGHT" over grey placeholder bars. Two
+  problems, found independently: grey bars are the universal visual language of
+  *unloaded content*, so the panel read as a loading skeleton; and a typeface
+  name in English is designer trivia illustrating a service whose own claim is
+  „не просто красива визия".
+
+  It now shows what the service actually produces: a hierarchy where one action
+  is unmistakably the strongest thing on screen. Nothing here is a grey fill.
+*/
+function ActionHierarchy() {
   return (
     <Frame className="justify-center">
-      <div className="flex items-baseline gap-3">
-        <span className="font-heading text-6xl font-bold leading-none">Аа</span>
-        <span className="text-xs uppercase tracking-eyebrow text-gold">
-          Inter Tight
+      <div className="space-y-2">
+        <div className="h-2.5 w-4/5 rounded-full bg-foreground/85" />
+        <div className="h-2.5 w-3/5 rounded-full bg-foreground/85" />
+      </div>
+
+      <div className="mt-4 space-y-1.5">
+        <div className="h-1 w-full rounded-full border border-graphite" />
+        <div className="h-1 w-11/12 rounded-full border border-graphite" />
+        <div className="h-1 w-2/3 rounded-full border border-graphite" />
+      </div>
+
+      {/* The one filled element in the composition. */}
+      <div className="mt-6">
+        <span className="inline-flex rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground">
+          Заявете оферта
         </span>
       </div>
-      <div className="mt-6 space-y-3 border-t border-graphite pt-5">
-        <p className="font-heading text-xl font-bold leading-none">Заглавие</p>
-        <p className="font-heading text-base font-bold leading-none text-muted-foreground">
-          Подзаглавие
-        </p>
-        <Bar w="100%" />
-        <Bar w="72%" />
+
+      <div className="mt-6 flex gap-2 border-t border-graphite pt-4">
+        <div className="h-8 flex-1 rounded border border-graphite" />
+        <div className="h-8 flex-1 rounded border border-graphite" />
+        <div className="h-8 flex-1 rounded border border-graphite" />
       </div>
+
+      <p className="mt-4 text-xs uppercase tracking-eyebrow text-muted-foreground">
+        Един екран · едно действие
+      </p>
     </Frame>
   );
 }
@@ -166,7 +189,6 @@ function SerpMock() {
       {/* Result */}
       <div className="mt-5 rounded-lg border border-gold/40 bg-gold/[0.04] p-3">
         <p className="text-sm font-medium text-gold">Tavernaki · Пловдив</p>
-        <p className="mt-1 text-[10px] text-sage">tavernaki.bg</p>
         <div className="mt-2 space-y-1.5">
           <Bar w="100%" />
           <Bar w="65%" />
@@ -174,11 +196,7 @@ function SerpMock() {
       </div>
 
       {/* Also-rans */}
-      <div className="mt-3 space-y-3 opacity-40">
-        <div className="space-y-1.5">
-          <Bar w="45%" className="bg-warm-gray/40" />
-          <Bar w="85%" />
-        </div>
+      <div className="mt-3 space-y-1.5 opacity-40">
         <div className="space-y-1.5">
           <Bar w="38%" className="bg-warm-gray/40" />
           <Bar w="75%" />
@@ -237,7 +255,7 @@ function TrafficChannels() {
 }
 
 const visuals: Record<string, () => React.ReactElement> = {
-  design: TypeSpecimen,
+  design: ActionHierarchy,
   development: ResponsiveFrames,
   maintenance: ScopeDial,
   seo: SerpMock,

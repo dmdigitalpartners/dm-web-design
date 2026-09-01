@@ -154,7 +154,9 @@ function Track({
         </ol>
 
       {footnote ? (
-        <p className="mt-6 border-t border-gold/20 pt-4 text-xs uppercase tracking-wider text-gold">
+        // Sentence case: this is a sentence now, and 12px letterspaced uppercase
+        // Cyrillic was flagged as being at the limit of readability.
+        <p className="mt-6 border-t border-gold/20 pt-4 text-sm text-gold">
           {footnote}
         </p>
       ) : null}
@@ -164,10 +166,7 @@ function Track({
 
 export function ProcessCompare() {
   const reduced = useReducedMotion();
-  const { usual, dm, markLabels, freeLabel } = home.processCompare;
-
-  // The nodes above that cost nothing — the same three as /process.
-  const freeCount = dm.steps.filter((s) => "free" in s && s.free).length;
+  const { usual, dm, markLabels, freeNote } = home.processCompare;
 
   /*
     Stacked, not side by side. The tracks have to share one horizontal axis for
@@ -192,7 +191,7 @@ export function ProcessCompare() {
         delay={0.12}
         reduced={reduced}
         markLabels={markLabels}
-        footnote={`${freeLabel} · ${freeCount} стъпки`}
+        footnote={freeNote}
       />
     </div>
   );

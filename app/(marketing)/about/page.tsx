@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { Reveal } from "@/components/marketing/Reveal";
 import { Founders } from "@/components/marketing/Founders";
@@ -64,7 +65,19 @@ export default function AboutPage() {
 
       <CTASection
         title="Преценете ни по работата, не по думите"
-        body="Разгледайте проектите ни, или направо запазете разговор и вижте безплатно демо за вашия бранд."
+        body={
+          <>
+            {/* „проектите ни" invited the reader to the work and was plain text —
+                a dead end at the exact moment the page points somewhere. */}
+            <Link
+              href="/work"
+              className="text-gold underline underline-offset-4 transition-colors hover:text-gold-bright"
+            >
+              Разгледайте проектите ни
+            </Link>
+            , или направо запазете разговор и вижте безплатно демо за вашия бранд.
+          </>
+        }
         cta="Запазете безплатен разговор"
       />
     </>

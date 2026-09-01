@@ -17,15 +17,15 @@ export function Founders() {
     <>
       <div className="mt-12 grid gap-6 sm:grid-cols-2">
         {founders.map((f, i) => (
-          <Reveal key={f.name} delay={i * 0.08}>
+          <Reveal key={f.name} delay={i * 0.08} className="h-full">
             <div className={cn(cardSurface, "flex h-full flex-col overflow-hidden")}>
               <Image
                 src={f.portrait}
                 alt={`${f.name}, ${f.role}`}
                 width={900}
                 height={1200}
-                sizes="(max-width: 640px) 100vw, 340px"
-                className="aspect-4/5 w-full object-cover object-top"
+                sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1200px) calc(50vw - 3rem), 540px"
+                className="aspect-3/4 w-full object-cover object-top"
               />
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="font-heading text-xl font-bold">{f.name}</h3>

@@ -41,6 +41,7 @@ export const pricingPage = {
   },
   comparison: {
     title: "Кой пакет е за вас",
+    columnLabel: "Критерий",
     rows: [
       { label: "Идеален за", foundation: "Първо онлайн присъствие", growth: "Растеж и повече запитвания", authority: "Максимален растеж и мащаб" },
       { label: "Обхват", foundation: "До 5 страници", growth: "Разширен сайт по целта ви", authority: "Магазин, многоезичност, интеграции" },

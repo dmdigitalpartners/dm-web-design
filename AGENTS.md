@@ -110,6 +110,7 @@ Names only — never values, never in this file. `.env.local` is gitignored and 
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL, sitemap, OG tags | Update when a real domain is connected |
 | `NEXT_PUBLIC_CAL_LINK` | Cal.com booking event | |
 | `RESEND_API_KEY` | Contact form delivery (server-only) | Unset → form shows an email fallback, by design |
+| `CONTACT_FROM` | Verified sender for contact emails | Optional until a sending domain is connected |
 | `CONTACT_EMAIL` | Where submissions are delivered | |
 
 ## Known state
